@@ -1,5 +1,6 @@
 from flask import Flask
 app = Flask(__name__)
+import re
 
 @app.route("/")
 def home():
@@ -7,11 +8,7 @@ def home():
 
 @app.route("/hello/<name>")
 def hello_there(name):
-    now = datetime.now()
-    formatted_now = now.strftime("%A, %d %B, %Y at %X")
 
-    # Filter the name argument to letters only using regular expressions. URL arguments
-    # can contain arbitrary text, so we restrict to safe characters only.
     match_object = re.match("[a-zA-Z]+", name)
 
     if match_object:
@@ -19,5 +16,5 @@ def hello_there(name):
     else:
         clean_name = "Friend"
 
-    content = "Hello there, " + clean_name + "! It's " + formatted_now
+    content = "Hello there, " + clean_name
     return content
