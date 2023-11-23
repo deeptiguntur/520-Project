@@ -1,0 +1,10 @@
+.login-container {
+    display: flex;
+    flex-direction: row;
+    .carousel-div {
+        width: 60%;
+    }
+    .login-div {
+        width: 40%;
+    }
+}
