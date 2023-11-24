@@ -1,10 +1,67 @@
+$font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
 .login-container {
     display: flex;
     flex-direction: row;
+    margin: 1rem 4rem;
+    align-items: center;
     .carousel-div {
-        width: 60%;
+        width: 80%;
+        img {
+            width: 100%;
+        }
     }
     .login-div {
-        width: 40%;
+        width: 30%;
+        border: #d4d4d4 solid 1px;
+        box-shadow: 0px 4px 8px #0a164626;
+        border-radius: 19px;
+        height: 27rem;
+        margin-left: 2rem;
+        .login-content {
+            display: flex;
+            flex-direction: column;
+            margin: 3rem 2.2rem;
+            align-items: center;
+            .sign-in {
+                font-size: 2rem;
+                color: #8C52FF;
+                margin-bottom: 1.8rem;
+            }
+            .input-field {
+                width: 100%;
+                height: 2.5rem; 
+                margin-bottom: 1.4rem;
+                border: 1px solid #5F5F5F;
+                border-radius: 0.5rem;
+                padding-left: 14px;
+            }
+            .login-button {
+                width: 8rem;
+                height: 2.7rem;
+                background-color: #8C52FF;
+                border: 1px solid #8C52FF;
+                border-radius: 2rem;
+                color: #fff;
+                box-shadow: 0px 4px 8px #0a164626;
+            }
+            .forgot-pwd {
+                margin-top: 1rem;
+                text-decoration: none;
+                color: #8C52FF;
+                font-weight: bold;
+                font-family: $font;
+            }
+            .sign-up {
+                margin: 1rem 0;
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                font-family: $font;
+                .sign-up-link {
+                    color: #000;
+                }
+            }
+        }
     }
 }
