@@ -10,6 +10,6 @@ export class LoginService {
   constructor(private httpClient: HttpClient, private appService: AppService) { }
 
   login(loginData: any) {
-    return this.httpClient.post(this.appService.DEV + 'login', loginData);
+    return this.httpClient.post(this.appService.DEV + '/login', loginData);
   }
 }
