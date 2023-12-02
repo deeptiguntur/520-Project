@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginService } from './login.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent {
     password: ["", Validators.required]
   });
 
-  constructor(private loginService: LoginService, private formBuilder: FormBuilder) {}
+  constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router) {}
 
   onSignIn() {
     console.log(this.loginForm.get('username')?.value);
@@ -24,6 +25,7 @@ export class LoginComponent {
       password: this.loginForm.get('password')?.value
     }
     this.loginService.login(loginData).subscribe();
+    this.router.navigate(['/add-product']);
   }
 
 }

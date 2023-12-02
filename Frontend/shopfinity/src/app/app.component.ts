@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AppService } from './app.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,8 @@ import { AppService } from './app.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'shopfinity';
 
-  constructor(private appService: AppService) {}
+  constructor(public router: Router) {}
   
   ngOnInit() {
   }

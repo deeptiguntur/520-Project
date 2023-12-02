@@ -1,4 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@fortawesome/fontawesome-free/css/all.css";
+
+$color: #8C52FF;
+
 * {
     box-sizing: border-box;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    img {
+        height: 7rem;
+    }
 }
