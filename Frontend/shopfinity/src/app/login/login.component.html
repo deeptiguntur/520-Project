@@ -1,19 +1,23 @@
-<div class="login-container">
-    <div class="carousel-div">
-        <img src="../assets/Images/Banner_img_1.jpg">
-    </div>
-    <div class="login-div">
-        <div class="login-content">
-            <div class="sign-in">
-                Sign In
-            </div>
-            <input class="input-field" name="username" placeholder="Username">
-            <input class="input-field" name="username" type="password" placeholder="Password">
-            <button class="login-button">Sign In</button>
-            <a class="forgot-pwd" href="/">Forgot password ?</a>
-            <div class="sign-up">
-                Don't already have an account? <a class="sign-up-link" href="*">Sign Up</a>
+<form [formGroup]="loginForm">
+    <div class="login-container">
+        <div class="carousel-div">
+            <img src="../assets/Images/Banner_img_1.jpg">
+        </div>
+        <div class="login-div">
+            <div class="login-content">
+                <div class="sign-in">
+                    Sign In
+                </div>
+                <input type="text" class="input-field" name="username" placeholder="Username"
+                    formControlName="username">
+                <input class="input-field" name="username" type="password" placeholder="Password"
+                    formControlName="password">
+                <button type="submit" class="login-button" (click)="onSignIn()">Sign In</button>
+                <a class="forgot-pwd" href="/">Forgot password ?</a>
+                <div class="sign-up">
+                    Don't already have an account? <a class="sign-up-link" href="\signup">Sign Up</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>

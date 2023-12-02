@@ -44,6 +44,13 @@ $font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 border-radius: 2rem;
                 color: #fff;
                 box-shadow: 0px 4px 8px #0a164626;
+                cursor: pointer;
+                &:hover {
+                    background-color: #7846dc;
+                }
+                &:active {
+                    background-color: #8C52FF;
+                }
             }
             .forgot-pwd {
                 margin-top: 1rem;

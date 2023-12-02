@@ -15,3 +15,9 @@ Database - MongoDB <br />
 Windows - <br />
 1. .venv\Scripts\activate
 2. python -m flask run
+
+### database
+
+password:KxvqWuZLmbTE0U7O
+username:dguntur
+ip address: 128.119.202.212/32

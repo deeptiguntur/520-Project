@@ -1,9 +1,11 @@
 from flask import Flask
 app = Flask(__name__)
 import re
-
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from flask import request, jsonify
+from flask_cors import CORS, cross_origin
+
 uri = "mongodb+srv://dguntur:KxvqWuZLmbTE0U7O@cluster0.5wory1k.mongodb.net/?retryWrites=true&w=majority"
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
@@ -17,16 +19,13 @@ except Exception as e:
 @app.route("/")
 def home():
     return "Hello, Flask!"
-
-@app.route("/hello/<name>")
-def hello_there(name):
-
-    match_object = re.match("[a-zA-Z]+", name)
-
-    if match_object:
-        clean_name = match_object.group(0)
-    else:
-        clean_name = "Friend"
-
-    content = "Hello there, " + clean_name
-    return content
+    
+# API endpoint for Login
+@app.route("/login", methods=['POST'])
+@cross_origin(origin='*')
+def login():
+    loginData = request.get_json()
+    print(loginData['username'])
+    print(loginData['password'])
+    return "True"
+    

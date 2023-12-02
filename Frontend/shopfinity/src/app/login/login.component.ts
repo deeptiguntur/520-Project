@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LoginService } from './login.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -6,5 +8,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+
+  loginForm = this.formBuilder.group({
+    username: ["", Validators.required],
+    password: ["", Validators.required]
+  });
+
+  constructor(private loginService: LoginService, private formBuilder: FormBuilder) {}
+
+  onSignIn() {
+    console.log(this.loginForm.get('username')?.value);
+    console.log(this.loginForm.get('password')?.value);
+    const loginData = {
+      username: this.loginForm.get('username')?.value,
+      password: this.loginForm.get('password')?.value
+    }
+    this.loginService.login(loginData).subscribe();
+  }
 
 }
