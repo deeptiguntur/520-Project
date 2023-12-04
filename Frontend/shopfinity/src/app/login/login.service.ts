@@ -12,4 +12,10 @@ export class LoginService {
   login(loginData: any) {
     return this.httpClient.post(this.appService.DEV + '/login', loginData);
   }
+
+  signup(signupData: any) {
+    return this.httpClient.post(this.appService.DEV + '/signup', signupData);
+  }
+
+
 }

@@ -1,5 +1,62 @@
-<form>
-    <div class="sign-up-container">
-        Signup
-    </div>
+<!-- signup.component.html -->
+<form [formGroup]="signupForm">
+  <div class="logo">
+      <img src="../assets/Logo/Logo_white.png" alt="Company Logo">
+  </div>
+  <div class="signup-container">
+      <div class="signup-div">
+          <div class="signup-content">
+              <div class="sign-up">
+                  Sign Up
+              </div>
+
+              <!-- Select User Type -->
+              <label for="userType">Are you a Seller or Customer?</label>
+              <select id="userType" class="input-field" formControlName="user_type">
+                  <option value="customer">Customer</option>
+                  <option value="seller">Seller</option>
+              </select>
+
+              <!-- Input for Email -->
+              <label for="email">Email</label>
+              <input type="text" class="input-field" name="email" placeholder="Email" formControlName="email">
+
+              <!-- Input for Username -->
+              <label for="username">Username</label>
+              <input type="text" class="input-field" name="username" placeholder="Username" formControlName="user_name">
+
+              <!-- Input for First Name -->
+              <label for="firstName">First Name</label>
+              <input type="text" class="input-field" name="firstName" placeholder="First Name" formControlName="first_name">
+
+              <!-- Input for Last Name -->
+              <label for="lastName">Last Name</label>
+              <input type="text" class="input-field" name="lastName" placeholder="Last Name" formControlName="last_name">
+
+              <!-- Textarea for Address -->
+              <label for="address">Address</label>
+              <textarea class="input-field" name="address" placeholder="Address" formControlName="address"></textarea>
+
+              <!-- Input for Phone Number -->
+              <label for="phoneNumber">Phone Number</label>
+              <input type="text" class="input-field" name="phoneNumber" placeholder="Phone Number" formControlName="phone">
+
+              <!-- Input for Password -->
+              <label for="password">Password</label>
+              <input type="password" class="input-field" name="password" placeholder="Password" formControlName="password">
+
+              <!-- Confirm Password -->
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="password" class="input-field" name="confirmPassword" placeholder="Confirm Password" formControlName="confirmPassword">
+
+              <!-- Sign Up Button -->
+              <button type="submit" class="signup-button" (click)="onSignUp()">Sign Up</button>
+
+              <!-- Login Link -->
+              <div class="login-link" style="margin-top: 20px; font-weight: bold;">
+                  Already have an account? <a routerLink="/login">Log In</a>
+              </div>
+          </div>
+      </div>
+  </div>
 </form>
