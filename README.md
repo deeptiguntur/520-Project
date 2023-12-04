@@ -17,5 +17,5 @@ Windows - <br />
 2. .venv\Scripts\activate
 3. python -m flask run
 Mac - <br />
-2. source .venv\bin\activate
+2. source .venv/bin/activate
 3. python -m flask run
