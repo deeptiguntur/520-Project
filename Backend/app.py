@@ -54,6 +54,45 @@ def login():
         return {'res':'False'}
 
     return "True"
+#API ontent for signup 
+@app.route('/signup', methods=['POST'])
+@cross_origin(origin='*')
+def signup():
+    signupData=request.get_json()
+    # Get form data
+    user_type=signupData['user_type']
+    email = signupData['email']
+    username = signupData['username']
+    first_name=signupData['first_name']
+    last_name=signupData['last_name']
+    address=signupData['address']
+    phone=signupData['phone']
+    password = signupData['password']
+
+
+
+    # Create a document to insert into MongoDB
+    user_data = {
+        'user_type': user_type,
+        'email': email,
+        'username': username,
+        'first_name':first_name,
+        'last_name':last_name,
+        'address': address,
+        'phone':phone,
+        'password': password
+
+    }
+
+    ##Insert the document into the MongoDB collection
+    result = collection.insert_one(user_data)
+
+    if result.inserted_id:
+        return "Signup successful! User ID: {}".format(result.inserted_id)
+
+    else:
+        return "Error occurred during signup"
+
 if __name__ == "__main__":
     app.run(debug=True)
 
