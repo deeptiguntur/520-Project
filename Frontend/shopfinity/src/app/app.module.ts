@@ -9,8 +9,9 @@ import { AppService } from './app.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
-import { AddProductComponent } from './add-product/add-product.component';
+import { AddProductComponent } from './seller-page/add-product/add-product.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SellerPageComponent } from './seller-page/seller-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LoginComponent,
     SignUpComponent,
     NavbarComponent,
-    AddProductComponent
+    AddProductComponent,
+    SellerPageComponent
   ],
   imports: [
     BrowserModule,

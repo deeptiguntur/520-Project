@@ -1,0 +1,60 @@
+<div>
+    <app-navbar></app-navbar>
+    <form [formGroup]="addProductForm">
+        <div class="add-product-container">
+            <div class="title">
+                Add Product
+            </div>
+            <div class="add-product-fields">
+                <div class="field">
+                    <label>Product name:</label>
+                    <input class="input-field" type="text" name="product-name" formControlName="productName">
+                </div>
+                <div class="field">
+                    <label>Product description:</label>
+                    <textarea class="input-field textarea" rows="5" cols="50" formControlName="productDesc"></textarea>
+                </div>
+                <div class="field">
+                    <label>Product category:</label>
+                    <select name="category" class="input-field dropdown" formControlName="category">
+                        <option value="">Select</option>
+                        <option value="clothing">Clothing, Shoes, Accessories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="home">Home</option>
+                        <option value="grocery">Grocery</option>
+                        <option value="furniture">Furniture</option>
+                        <option value="beauty">Beauty</option>
+                        <option value="pets">Pet Supplies</option>
+                      </select>
+                </div>
+                <div class="field">
+                    <label>Price ($):</label>
+                    <input class="input-field" type="text" name="price" formControlName="price">
+                </div>
+                <div class="field">
+                    <label>Quantity:</label>
+                    <input class="input-field" type="text" name="quantity" formControlName="quantity">
+                </div>
+                <div class="field">
+                    <label>Sale :</label>
+                    <input type="checkbox" class="checkbox" formControlName="sale">
+                </div>
+                <div class="field">
+                    <label>Discount (%):</label>
+                    <input class="input-field" type="text" name="Discount" formControlName="discount">
+                </div>
+                <div class="field">
+                    <label>Product Image:</label>
+                    <button class="attach-image-btn">
+                        <i class="fa-solid fa-paperclip"></i>
+                        Attach
+                    </button>
+                </div>
+                <div class="submit-button">
+                    <button type="submit" (click)="addProduct()">Add Product</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+ 

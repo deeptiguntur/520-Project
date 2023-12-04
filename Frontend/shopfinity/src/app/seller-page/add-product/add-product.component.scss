@@ -1,11 +1,12 @@
-@import '../../styles.scss';
+@import '../../../styles.scss';
 
 .add-product-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 2rem 5rem 0 5rem;
+    margin: 2rem 5rem 4rem 5rem;
+
     .title {
         font-size: 2rem;
     }

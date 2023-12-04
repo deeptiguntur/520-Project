@@ -12,9 +12,10 @@ Database - MongoDB <br />
 2. npm start
 
 ### To run Backend - <br />
+1. cd Backend
 Windows - <br />
-1. .venv\Scripts\activate
-2. python -m flask run
+2. .venv\Scripts\activate
+3. python -m flask run
 Mac - <br />
-1. source .venv\Scripts\activate
-2. python -m flask run
+2. source .venv\bin\activate
+3. python -m flask run
