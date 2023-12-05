@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { SellerService } from '../seller.service';
 
 @Component({
   selector: 'app-add-product',
@@ -15,13 +16,31 @@ export class AddProductComponent {
     price: ["", Validators.required],
     quantity: ["", Validators.required],
     sale: [false],
-    discount: [""],
+    discount: [""]
   });
 
-  constructor(private formBuilder: FormBuilder) {}
+  filesEvent: any;
+  imgData: any = [];
+
+  constructor(private formBuilder: FormBuilder, private sellerService: SellerService) {}
 
   addProduct() {
-    console.log(this.addProductForm);
+    let productData: any = this.addProductForm.value;
+    productData = {
+      ...productData,
+      'imgData': this.imgData
+    };
+    if (this.addProductForm.valid && this.imgData.length) {
+      this.sellerService.addProduct(productData).subscribe();
+    }
+  }
+
+  selectFiles(event: any) {
+    this.filesEvent = event;
+  }
+  
+  setImages(event: any) {
+    this.imgData = Array.from(event);
   }
 
 }

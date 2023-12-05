@@ -15,7 +15,7 @@
         .field {
             display: flex;
             flex-direction: row;
-            margin-bottom: 1.4rem;
+            margin-bottom: 1rem;
             align-items: center;
             label {
                 width: 14rem;
@@ -44,11 +44,14 @@
                 margin-left: -3.8rem;
             }
             .attach-image-btn {
-                width: 8rem;
+                width: 100%;
                 height: 2rem;
-                cursor: pointer;
-                margin-left: -3.8rem;
+                padding-top: 0.4rem;
             }
+        }
+        .img-preview {
+            max-width: 40rem;
+            margin-bottom: 1.5rem;
         }
         .submit-button {
             display: flex;

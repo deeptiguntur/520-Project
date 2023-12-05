@@ -6,11 +6,12 @@ from pymongo.server_api import ServerApi
 from flask import request, jsonify
 from flask_cors import CORS, cross_origin
 
+# Create a new client and connect to the server
 uri = "mongodb+srv://anamikaghosh:KivaL2QA9mYb89gY@cluster0.uela1gh.mongodb.net/?retryWrites=true&w=majority"
 client = MongoClient(uri, server_api=ServerApi('1'))
 db = client['Shopfinity']  # Replace '
 collection = db['Login_Details']  # Replace
-# Create a new client and connect to the server
+product_collection = db['Product_Details']  # Replace
 
 # Send a ping to confirm a successful connection
 try:
@@ -27,21 +28,7 @@ def home():
 @app.route("/login", methods=['POST'])
 @cross_origin(origin='*')
 def login():
-    # if request.method == 'POST':
-    #     username = request.form['username']
-    #     password = request.form['password']
-
-    #     # Check if the username and password exist in MongoDB
-    #     user_entry = collection.find_one({'username': username, 'password': password})
-
-    #     if user_entry:
-    #         print("Login successful for user ")
-    #         print(username)
-    #     else:
-    #         return "Invalid username or password. Please try again."
     loginData = request.get_json()
-    # print(loginData['username'])
-    # print(loginData['password'])
     user=loginData['username']
     passw=loginData['password']
     user_entry = collection.find_one({'username': user, 'password': passw})
@@ -53,8 +40,8 @@ def login():
         print("Invalid username or password. Please try again.")
         return {'res':'False'}
 
-    return "True"
-#API ontent for signup 
+
+#API endpoint for signup 
 @app.route('/signup', methods=['POST'])
 @cross_origin(origin='*')
 def signup():
@@ -69,8 +56,6 @@ def signup():
     phone=signupData['phone']
     password = signupData['password']
 
-
-
     # Create a document to insert into MongoDB
     user_data = {
         'user_type': user_type,
@@ -81,7 +66,6 @@ def signup():
         'address': address,
         'phone':phone,
         'password': password
-
     }
 
     ##Insert the document into the MongoDB collection
@@ -89,9 +73,20 @@ def signup():
 
     if result.inserted_id:
         return "Signup successful! User ID: {}".format(result.inserted_id)
-
     else:
         return "Error occurred during signup"
+
+# Add product to DB
+@app.route("/seller/add-product", methods=['POST'])
+@cross_origin(origin='*')
+def addProduct():
+    productData = request.get_json()
+    result = product_collection.insert_one(productData)
+    if result.inserted_id:
+        return {'msg': "Added Product!: {}".format(result.inserted_id)}
+    else:
+        return {'msg': "Error occurred during adding product"}
+    
 
 if __name__ == "__main__":
     app.run(debug=True)

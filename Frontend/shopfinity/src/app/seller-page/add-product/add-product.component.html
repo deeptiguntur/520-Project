@@ -45,10 +45,10 @@
                 </div>
                 <div class="field">
                     <label>Product Image:</label>
-                    <button class="attach-image-btn">
-                        <i class="fa-solid fa-paperclip"></i>
-                        Attach
-                    </button>
+                    <input class="attach-image-btn" type="file" accept="image/*" multiple (change)="selectFiles($event)" />
+                </div>
+                <div class="img-preview">
+                    <app-upload-images [files]="filesEvent" (imgData)="setImages($event)"></app-upload-images>
                 </div>
                 <div class="submit-button">
                     <button type="submit" (click)="addProduct()">Add Product</button>
