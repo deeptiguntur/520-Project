@@ -13,6 +13,7 @@ import { AddProductComponent } from './seller-page/add-product/add-product.compo
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SellerPageComponent } from './seller-page/seller-page.component';
 import { UploadImagesComponent } from './seller-page/upload-images/upload-images.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UploadImagesComponent } from './seller-page/upload-images/upload-images
     NavbarComponent,
     AddProductComponent,
     SellerPageComponent,
-    UploadImagesComponent
+    UploadImagesComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,
