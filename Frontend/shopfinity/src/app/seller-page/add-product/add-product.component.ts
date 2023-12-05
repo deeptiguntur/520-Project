@@ -21,6 +21,8 @@ export class AddProductComponent {
 
   filesEvent: any;
   imgData: any = [];
+  showSuccess = false;
+  showError = false;
 
   constructor(private formBuilder: FormBuilder, private sellerService: SellerService) {}
 
@@ -31,7 +33,13 @@ export class AddProductComponent {
       'imgData': this.imgData
     };
     if (this.addProductForm.valid && this.imgData.length) {
-      this.sellerService.addProduct(productData).subscribe();
+      this.sellerService.addProduct(productData).subscribe((data: any) => {
+        if (data.res === 'True') {
+          this.showSuccess = true;
+        } else {
+          this.showError = false;
+        }
+      });
     }
   }
 
