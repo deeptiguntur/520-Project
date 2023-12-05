@@ -15,6 +15,8 @@ export class LoginComponent {
     password: ["", Validators.required]
   });
 
+  showError = false;
+
   constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router) {}
 
   onSignIn() {
@@ -26,7 +28,10 @@ export class LoginComponent {
     }
     this.loginService.login(loginData).subscribe((data:any) => {
       if (data.res === "True") {
+        this.showError = false;
         this.router.navigate(['/add-product']);
+      } else {
+        this.showError = true;
       }
     });
   }

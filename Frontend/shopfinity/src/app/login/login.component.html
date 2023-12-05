@@ -15,6 +15,9 @@
                     formControlName="username">
                 <input class="input-field" name="username" type="password" placeholder="Password"
                     formControlName="password">
+                <div class="error-msg" *ngIf="showError">
+                    Invalid username or password.
+                </div>
                 <button type="submit" class="login-button" (click)="onSignIn()">Sign In</button>
                 <a class="forgot-pwd" routerLink="/">Forgot password ?</a>
                 <div class="sign-up">
