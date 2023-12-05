@@ -24,8 +24,11 @@ export class LoginComponent {
       username: this.loginForm.get('username')?.value,
       password: this.loginForm.get('password')?.value
     }
-    this.loginService.login(loginData).subscribe();
-    this.router.navigate(['/add-product']);
+    this.loginService.login(loginData).subscribe((data:any) => {
+      if (data.res === "True") {
+        this.router.navigate(['/add-product']);
+      }
+    });
   }
 
 }
