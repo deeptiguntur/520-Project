@@ -50,6 +50,12 @@
                 <div class="img-preview">
                     <app-upload-images [files]="filesEvent" (imgData)="setImages($event)"></app-upload-images>
                 </div>
+                <div class="show-success" *ngIf="showSuccess">
+                    Product added successfully!
+                </div>
+                <div class="show-error" *ngIf="showError">
+                    Error while adding product.
+                </div>
                 <div class="submit-button">
                     <button type="submit" (click)="addProduct()">Add Product</button>
                 </div>

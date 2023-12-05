@@ -9,7 +9,7 @@ from flask_cors import CORS, cross_origin
 # Create a new client and connect to the server
 uri = "mongodb+srv://anamikaghosh:KivaL2QA9mYb89gY@cluster0.uela1gh.mongodb.net/?retryWrites=true&w=majority"
 client = MongoClient(uri, server_api=ServerApi('1'))
-db = client['Shopfinity']  # Replace '
+db = client['Shopfinity']  # Replace
 collection = db['Login_Details']  # Replace
 product_collection = db['Product_Details']  # Replace
 
@@ -83,9 +83,15 @@ def addProduct():
     productData = request.get_json()
     result = product_collection.insert_one(productData)
     if result.inserted_id:
-        return {'msg': "Added Product!: {}".format(result.inserted_id)}
+        return {
+            'res': 'True',
+            'msg': "Added Product!: {}".format(result.inserted_id)
+        }
     else:
-        return {'msg': "Error occurred during adding product"}
+        return {
+            'res': 'True',
+            'msg': "Error occurred during adding product"
+        }
     
 
 if __name__ == "__main__":

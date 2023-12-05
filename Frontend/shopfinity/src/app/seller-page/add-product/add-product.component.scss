@@ -53,6 +53,20 @@
             max-width: 40rem;
             margin-bottom: 1.5rem;
         }
+        .show-success {
+            text-align: center;
+            color: green;
+            font-size: 18px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        .show-error {
+            color: red;
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
         .submit-button {
             display: flex;
             justify-content: center;
