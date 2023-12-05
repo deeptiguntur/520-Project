@@ -12,6 +12,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AddProductComponent } from './seller-page/add-product/add-product.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SellerPageComponent } from './seller-page/seller-page.component';
+import { UploadImagesComponent } from './seller-page/upload-images/upload-images.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SellerPageComponent } from './seller-page/seller-page.component';
     SignUpComponent,
     NavbarComponent,
     AddProductComponent,
-    SellerPageComponent
+    SellerPageComponent,
+    UploadImagesComponent
   ],
   imports: [
     BrowserModule,
