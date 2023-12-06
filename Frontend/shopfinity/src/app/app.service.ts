@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from  '@angular/common/http';
+// import { AppService } from '../app.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,4 +11,11 @@ export class AppService {
 
   constructor(private httpClient: HttpClient) { }
 
+  getProducts() {
+    return this.httpClient.get(this.DEV + '/product/all-products');
+  }
+
 }
+
+
+

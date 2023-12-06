@@ -46,14 +46,12 @@ def login():
     passw=loginData['password']
 
     #encryption
-    encrypted_username = encrypt(user)
-    encrypted_password = encrypt(passw)
-    print("Encrypted Username:", encrypted_username)
-    print("Encrypted Password:", encrypted_password)
-    decrypted_username = decrypt(encrypted_username)
-    decrypted_password = decrypt(encrypted_password)
-    print("Decrypted Username:", decrypted_username)
-    print("Decrypted Password:", decrypted_password)
+    # encrypted_username = encrypt(user)
+    # encrypted_password = encrypt(passw)
+    # print("encrypted_username 11 : ",encrypted_username)
+    # print("encrypted_password 11 : ",encrypted_password)
+    # decrypted_username = decrypt(encrypted_username)
+    # decrypted_password = decrypt(encrypted_password)
 
     user_entry = collection.find_one({'username': user, 'password': passw})
     if user_entry:
@@ -79,7 +77,8 @@ def signup():
     address=signupData['address']
     phone=signupData['phone']
     password = signupData['password']
-
+    # encrypted_username = encrypt(username)
+    # encrypted_password = encrypt(password)
     # Create a document to insert into MongoDB
     user_data = {
         'user_type': user_type,
@@ -89,8 +88,10 @@ def signup():
         'last_name':last_name,
         'address': address,
         'phone':phone,
-        'password': password
+        'password':password
     }
+    # print("encrypted_username 2 : ",encrypted_username)
+    # print("encrypted_password 2 : ",encrypted_password)
 
     ##Insert the document into the MongoDB collection
     result = collection.insert_one(user_data)
@@ -116,7 +117,17 @@ def addProduct():
             'res': 'True',
             'msg': "Error occurred during adding product"
         }
-    
+
+@app.route("/product/all-products", methods=['GET'])
+@cross_origin(origin='*')
+def getAllProducts():
+    # products = product_collection.find().toArray()
+    products = list(product_collection.find())
+    product_list = []
+    for product in products:
+        product['_id'] = str(product.get('_id'))
+        product_list.append(product)
+    return product_list 
 
 if __name__ == "__main__":
     app.run(debug=True)
