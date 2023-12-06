@@ -49,9 +49,12 @@
             height: 9rem;
             width: 8rem;
             display: flex;
+            margin-right: 1rem;
 
             .img {
                 border-radius: 1rem;
+                width: 8rem;
+                object-fit: cover;
             }
         }
 
