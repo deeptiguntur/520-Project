@@ -29,7 +29,7 @@ export class LoginComponent {
     this.loginService.login(loginData).subscribe((data:any) => {
       if (data.res === "True") {
         this.showError = false;
-        this.router.navigate(['/add-product']);
+        this.router.navigate(['/seller/dashboard']);
       } else {
         this.showError = true;
       }

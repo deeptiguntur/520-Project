@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-seller-page',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class SellerPageComponent {
 
+  constructor(private router: Router) {}
+
+  goToAddProduct() {
+    this.router.navigate(['/add-product']);
+  }
 }
