@@ -1,6 +1,7 @@
 from flask import Flask
 app = Flask(__name__)
 import re
+from cryptography.fernet import Fernet #encrypt
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from flask import request, jsonify
@@ -23,7 +24,19 @@ except Exception as e:
 @app.route("/")
 def home():
     return "Hello, Flask!"
-    
+
+#encryption
+# Generate a key for encryption and decryption
+key = Fernet.generate_key()
+cipher_suite = Fernet(key)
+def encrypt(text):
+    encrypted_text = cipher_suite.encrypt(text.encode())
+    return encrypted_text
+def decrypt(encrypted_text):
+    decrypted_text = cipher_suite.decrypt(encrypted_text).decode()
+    return decrypted_text
+
+
 # API endpoint for Login
 @app.route("/login", methods=['POST'])
 @cross_origin(origin='*')
@@ -31,6 +44,17 @@ def login():
     loginData = request.get_json()
     user=loginData['username']
     passw=loginData['password']
+
+    #encryption
+    encrypted_username = encrypt(user)
+    encrypted_password = encrypt(passw)
+    print("Encrypted Username:", encrypted_username)
+    print("Encrypted Password:", encrypted_password)
+    decrypted_username = decrypt(encrypted_username)
+    decrypted_password = decrypt(encrypted_password)
+    print("Decrypted Username:", decrypted_username)
+    print("Decrypted Password:", decrypted_password)
+
     user_entry = collection.find_one({'username': user, 'password': passw})
     if user_entry:
         print("Login successful for user ")
