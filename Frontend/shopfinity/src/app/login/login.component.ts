@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LoginService } from './login.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent {
 
   showError = false;
 
-  constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router) {}
+  constructor(private loginService: LoginService, private appService: AppService, private formBuilder: FormBuilder, private router: Router) {}
 
   onSignIn() {
     console.log(this.loginForm.get('username')?.value);
@@ -29,7 +30,11 @@ export class LoginComponent {
     this.loginService.login(loginData).subscribe((data:any) => {
       if (data.res === "True") {
         this.showError = false;
-        this.router.navigate(['/seller/dashboard']);
+        if (data.user_type === 'customer') {
+          this.router.navigate(['/user/product-list']);
+        } else {
+          this.router.navigate(['/seller/dashboard']);
+        }
       } else {
         this.showError = true;
       }

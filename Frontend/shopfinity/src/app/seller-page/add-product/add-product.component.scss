@@ -12,6 +12,9 @@
     }
     .add-product-fields {
         margin-top: 2.5rem;
+        .required {
+            color: red;
+        }
         .field {
             display: flex;
             flex-direction: row;
