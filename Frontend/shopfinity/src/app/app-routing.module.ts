@@ -9,7 +9,8 @@ const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full' },
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignUpComponent},
-  {path: 'seller/add-product', component: AddProductComponent},
+  {path: 'add-product', component: AddProductComponent},
+  {path: 'seller/dashboard', component: SellerPageComponent},
   {path:'user/order-details',component:OrderDetailsComponent}
 ];
 
