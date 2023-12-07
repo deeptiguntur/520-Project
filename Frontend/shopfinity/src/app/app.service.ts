@@ -8,6 +8,8 @@ import { HttpClient } from  '@angular/common/http';
 export class AppService {
 
   DEV = "http://127.0.0.1:5000";
+  loginId = '';
+  user_type = ''
 
   constructor(private httpClient: HttpClient) { }
 

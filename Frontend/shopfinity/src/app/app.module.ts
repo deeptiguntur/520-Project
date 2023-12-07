@@ -14,6 +14,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SellerPageComponent } from './seller-page/seller-page.component';
 import { UploadImagesComponent } from './seller-page/upload-images/upload-images.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductViewComponent } from './product-view/product-view.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     AddProductComponent,
     SellerPageComponent,
     UploadImagesComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    ProductListComponent,
+    ProductViewComponent
   ],
   imports: [
     BrowserModule,

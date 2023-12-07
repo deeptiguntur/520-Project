@@ -1,0 +1,116 @@
+@import '../../styles.scss';
+
+.category-bar {
+    box-shadow: 0px 2px 5px #0a164626;
+    height: 3rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: $font;
+    background-color: $color;
+    font-weight: 500;
+    button {
+        background: transparent;
+        border: none;
+        font-size: 1rem;
+        color: white;
+        cursor: pointer;
+    }
+}
+
+.products-container {
+    margin-top: 3rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    display: flex;
+    .product {
+        box-shadow: 0px 1px 8px #0a164626;
+        width: 14rem;
+        height: 19.2rem;
+        margin: 0.7rem;
+        cursor: pointer;
+        .product-image {
+            height: 10rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            box-shadow: 0px 1px 0px #0a164626;
+            .image {
+                object-fit: cover;
+                max-width: 14rem;
+            }
+        }
+        .product-desc {
+            margin: 0.5rem;
+            font-family: $font;
+            .product-detail {
+                margin-bottom: 0.75rem;
+                .product-name {
+                    font-weight: bold;
+                }
+                .brand-name {
+                    font-weight: 500;
+                }
+            }
+            .price {
+                display: flex;
+                flex-direction: row;
+                font-size: 1.1rem;
+                .dollar {
+                    font-size: 14px;
+                    color: black !important;
+                    font-weight: 500;
+                }
+                .discount-price {
+                    margin-right: 1rem;
+                    font-weight: 500;
+                    color: red;
+                }
+                .is-discount {
+                    text-decoration: line-through;
+                }
+            }
+            .cart-buttons {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 1rem;
+                flex-direction: column;
+                .add-to-cart-btn {
+                    width: 9rem;
+                    height: 1.7rem;
+                    background-color: $color;
+                    border: 1px solid $color;
+                    border-radius: 0.5rem;
+                    color: #fff;
+                    box-shadow: 0px 4px 8px #0a164626;
+                    cursor: pointer;
+                    &:hover {
+                        background-color: #7846dc;
+                    }
+                    &:active {
+                        background-color: #8C52FF;
+                    }
+                }
+                .button-area {
+                    display: flex;
+                    .quantity {
+                        text-align: center;
+                        width: 4rem;
+                        height: 1.7rem;
+                        background-color: #8C52FF;
+                        border: 1px solid #8C52FF;
+                        color: #fff;
+                    }
+                    .quantity-change-btn {
+                        width: 2rem;
+                        border: 1px solid #8C52FF;
+                        background-color: #fff;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}
