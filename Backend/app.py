@@ -57,7 +57,7 @@ def login():
     if user_entry:
         print("Login successful for user ")
         print(user)
-        return {'res':'True'}
+        return {'res':'True', 'user_type': user_entry['user_type'], 'user_id': str(user_entry.get('_id'))}
     else:
         print("Invalid username or password. Please try again.")
         return {'res':'False'}
@@ -97,9 +97,9 @@ def signup():
     result = collection.insert_one(user_data)
 
     if result.inserted_id:
-        return "Signup successful! User ID: {}".format(result.inserted_id)
+        return {'res': 'True', 'msg': "Signup successful!"}
     else:
-        return "Error occurred during signup"
+        return {'res': 'False', 'msg:': "Error occurred during signup"}
 
 # Add product to DB
 @app.route("/seller/add-product", methods=['POST'])
