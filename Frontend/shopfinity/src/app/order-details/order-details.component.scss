@@ -1,0 +1,92 @@
+/* styles.css */
+
+.padding-container{
+    padding-left:3.5rem;
+    padding-top:2rem;
+    margin: 3rem 2.2rem 1rem 2.2rem;
+    align-items: center;
+    .cart-container{
+        padding-bottom: 0.5rem;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #949494;
+    }
+    .user-product{
+        display:flex;
+        flex-direction:row;
+        justify-content: space-between;
+    }
+    .product-display{
+        // padding:1rem;
+        border: 2px solid #e6e6e6;
+        width: 30rem;
+        border-radius: 1rem;
+        background-color: #F8F4FF;
+        display:flex;
+        flex-direction: row;
+    
+        .cart-image{
+      
+            width:10rem;
+            height:10rem;
+            display:flex;
+            img{
+                border-radius:1rem;
+            }
+        }
+        .Item{
+
+            padding-bottom: 1rem;
+        }
+        .Description{
+            padding-top: 1rem;
+            padding-bottom: 2rem;
+                }
+        .cart-added{
+            border: 1px solid;
+            display: flex;
+            justify-content: space-between;
+            background-color: #8C52FF;
+            .quantity{
+                color:white;
+                text-align: center;
+            }
+            .increase-btn,
+                .decrease-btn {
+                  cursor: pointer;
+                  background-color: white;
+                  color: 088F8F;
+                  border: none;
+                  padding: 5px 10px;
+                //   margin-left: 5px;
+                }
+                
+                .increase-btn:hover,
+                .decrease-btn:hover {
+                  background-color: #45a049;
+                }
+
+        }
+                
+    }
+    .order-summary{
+        
+        align-items: center;
+        // margin: 4rem 2.2rem 1rem 2.2rem;
+        
+        text-align: center;
+        font-size: 1.2rem;
+        border: 2px solid #e6e6e6;
+        width: 30rem;
+        border-radius: 1rem;
+        background-color: #F8F4FF;
+        
+        
+        display:flex;
+        flex-direction: column;
+    }
+
+    
+    
+}
+
