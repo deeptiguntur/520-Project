@@ -2,7 +2,7 @@
 
 .padding-container{
     padding-left:3.5rem;
-    padding-top:2rem;
+    padding-top:1rem;
     margin: 3rem 2.2rem 1rem 2.2rem;
     align-items: center;
     .cart-container{
@@ -71,20 +71,127 @@
     }
     .order-summary{
         
-        align-items: center;
-        // margin: 4rem 2.2rem 1rem 2.2rem;
         
-        text-align: center;
         font-size: 1.2rem;
         border: 2px solid #e6e6e6;
-        width: 30rem;
+        width: 25rem;
         border-radius: 1rem;
         background-color: #F8F4FF;
         
-        
         display:flex;
         flex-direction: column;
+     
+        padding-bottom: 1rem;
+        font-size: 1.3rem;
+        padding-left: 0.5rem;
+        .subtotal{
+            display: flex;
+            flex-direction: row;
+            font-size: 1.1rem;
+            justify-content: space-between;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            font-size: 0.5rem;
+            
+            .head-total{
+                // margin-right: 8rem;
+                font-weight: 500;
+                font-size: 1rem;
+                padding-right: 0.5rem;
+    
+            }
+            .Amount{
+                  font-weight: 500;
+                font-size: 1rem;
+                padding-right: 0.5rem;
+
+            }
+           
+        }
+        .savings{
+                display: flex;
+                flex-direction: row;
+                font-size: 1.1rem;
+                justify-content: space-between;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+                font-size: 0.5rem;
+            .head-total{
+                    // margin-right: 8rem;
+                    font-weight: 500;
+                    font-size: 1rem;
+                    padding-right: 0.5rem;
+        
+                }   
+               
+            .amount-saved{
+                    font-weight: 500;
+                    font-size: 1rem;
+                    padding-right: 0.5rem;
+    
+            }
+               
+        
+            }
+            .deducted{
+                display: flex;
+                flex-direction: row;
+                font-size: 1.1rem;
+                justify-content: space-between;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+                font-size: 0.5rem;
+            .final{
+                    // margin-right: 8rem;
+                    font-weight: 500;
+                    font-size: 1rem;
+                    padding-right: 0.5rem;
+        
+                }   
+            .discount-amount{
+                border: 1.5px solid #e6e6e6;
+                background-color: gainsboro;
+                padding-right: 0.5rem;
+                .amount-final{
+                    font-weight: 500;
+                    font-size: 1rem;
+                    padding-right: 0.5rem;
+                    color:green;
+    
+            }
+            }   
+            
+               
+        
+            }
+            .payment-page{
+                display: flex;
+                flex-direction: row;
+                margin-left: 2rem;
+                margin-right: 2rem;
+                border-radius: 0.4rem;
+                border: 1.5px solid #e6e6e6;
+                background-color: #8C52FF;
+                align-items: center;
+                width:20rem;
+                color:white;
+                font-size: 1.2rem;
+                text-align: center;
+                justify-content: space-between;
+                padding-left: 12px;
+                height:2rem;
+                .arrow{
+                    margin-right: 10px;
+                    
+
+
+                }
+                
+
+            }
+        
     }
+    
 
     
     
