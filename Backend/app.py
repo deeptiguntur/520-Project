@@ -6,6 +6,8 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from flask import request, jsonify
 from flask_cors import CORS, cross_origin
+import base64
+
 
 # Create a new client and connect to the server
 uri = "mongodb+srv://anamikaghosh:KivaL2QA9mYb89gY@cluster0.uela1gh.mongodb.net/?retryWrites=true&w=majority"
@@ -13,6 +15,7 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 db = client['Shopfinity']  # Replace
 collection = db['Login_Details']  # Replace
 product_collection = db['Product_Details']  # Replace
+cart_collection=db['Cart_Details']
 
 # Send a ping to confirm a successful connection
 try:
@@ -128,7 +131,30 @@ def getAllProducts():
         product['_id'] = str(product.get('_id'))
         product_list.append(product)
     return product_list 
+@app.route("/orders", methods=['GET'])
+@cross_origin(origin='*')
+def orderdetails():
+    orders = list(cart_collection.find())
+    order_list = []
+    # for order in orders:
+    #     order['_id'] = str(order.get('_id'))
+    #     order_list.append(order)
+    # return order_list 
+    products = list(product_collection.find())  # Retrieve all products
 
+    # Add image data to each order based on product_id
+    for order in orders:
+        for product in products:
+            product['_id']=str(product.get('_id'))
+            if product['_id'] == order['product_id']:
+                print("Hi")
+                order['_id'] = str(order.get('_id'))
+                order['imgData'] = product.get('imgData')
+               
+
+
+                order_list.append(order)
+    return order_list 
 if __name__ == "__main__":
     app.run(debug=True)
 

@@ -16,6 +16,9 @@ export class AppService {
   getProducts() {
     return this.httpClient.get(this.DEV + '/product/all-products');
   }
+  getOrders(){
+    return this.httpClient.get(this.DEV + '/orders');
+  }
 
 }
 
