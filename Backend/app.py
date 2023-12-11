@@ -21,10 +21,6 @@ try:
 except Exception as e:
     print(e)
 
-@app.route("/")
-def home():
-    return "Hello, Flask!"
-
 #encryption
 # Generate a key for encryption and decryption
 key = Fernet.generate_key()
@@ -97,7 +93,7 @@ def signup():
     result = collection.insert_one(user_data)
 
     if result.inserted_id:
-        return {'res': 'True', 'msg': "Signup successful!"}
+        return {'res': 'True', 'msg': "Signup successfull!"}
     else:
         return {'res': 'False', 'msg:': "Error occurred during signup"}
 
@@ -121,13 +117,13 @@ def addProduct():
 @app.route("/product/all-products", methods=['GET'])
 @cross_origin(origin='*')
 def getAllProducts():
-    # products = product_collection.find().toArray()
     products = list(product_collection.find())
     product_list = []
     for product in products:
         product['_id'] = str(product.get('_id'))
         product_list.append(product)
-    return product_list 
+    return product_list
+
 
 if __name__ == "__main__":
     app.run(debug=True)
