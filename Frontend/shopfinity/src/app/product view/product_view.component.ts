@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-view',
-  templateUrl: './product-view.component.html',
+  templateUrl: './pro.html',
   styleUrls: ['./product-view.component.scss']
 })
-export class ProductViewComponent {
+export class ProductViewComponent implements OnInit {
   product: any; 
 
   constructor(private route: ActivatedRoute) { }
@@ -22,14 +22,17 @@ export class ProductViewComponent {
     
     this.product = {
       id: productId,
-      name: 'IPhone 15 Pro',
-      description: 's',
-      imageUrl: '../../assets/Images/Screenshot 2023-12-06 at 1.47.33 PM.png',
-      productBrand: 'Apple',
-      price: 999.99,
-      sale: false,
-      discount: 0,
-      productSpecs: 'Sample specifications'
+      name: 'S',
+      description: 'S',
+      imageUrl: 'sa.jpg',
+      productBrand: 'S',
+      category: 'Electr',
+      price: 99.99,
+      quantity: 10,
+      sale: true,
+      discount: 10,
+      shippingDetails: 's',
+      productSpecs: 'S'
     };
   }
 
@@ -38,5 +41,3 @@ export class ProductViewComponent {
     console.log('Product added to cart:', this.product);
   }
 }
-
-
