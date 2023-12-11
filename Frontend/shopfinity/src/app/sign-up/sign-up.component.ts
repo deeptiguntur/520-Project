@@ -11,7 +11,7 @@ import { LoginService } from '../login/login.service';
 export class SignUpComponent {
   signupForm = this.formBuilder.group({
     user_type: ["customer", Validators.required],
-    user_name: ["", Validators.required],
+    username: ["", Validators.required],
     email: ["", [Validators.required, Validators.email]],
     password: ["", Validators.required],
     first_name: ["", Validators.required],
