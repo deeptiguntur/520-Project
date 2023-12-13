@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AppService } from '../app.service';
 import { Product } from './product.model';
 import { range } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -16,7 +17,7 @@ export class ProductListComponent {
   productData: Product[] = [];
   addToCartData:any = [];
 
-  constructor(private appService: AppService) {}
+  constructor(private appService: AppService, private router: Router) {}
 
   ngOnInit() {
     this.appService.getProducts().subscribe((data: Product[]) => {
@@ -28,7 +29,8 @@ export class ProductListComponent {
 
   }
 
-  updateQuantity(increase: boolean, index: number) {
+  updateQuantity(increase: boolean, index: number, event:any) {
+    event.stopPropagation();
     if (increase) {
       this.addToCartData[index].quantity = this.addToCartData[index].quantity+1;
       this.addToCartData[index].addToCart = false;
@@ -40,6 +42,13 @@ export class ProductListComponent {
         this.addToCartData[index].quantity = this.addToCartData[index].quantity-1;
       }
     }
+  }
+
+  productClicked(productId: string) {
+    this.appService.selectedProduct = this.productData.find(product => product._id === productId);
+    sessionStorage.setItem('selectedProduct', JSON.stringify(this.appService.selectedProduct));
+    console.log(this.appService.selectedProduct)
+    this.router.navigate(['user/product/view'], { queryParams: { id: productId }})
   }
  
 }

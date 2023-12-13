@@ -11,7 +11,8 @@ export class AppService {
 
   DEV = "http://127.0.0.1:5000";
   loginId = '';
-  user_type = ''
+  user_type = '';
+  selectedProduct: Product | undefined;
 
   constructor(private httpClient: HttpClient) { }
 

@@ -16,7 +16,8 @@ const routes: Routes = [
   {path: 'seller/dashboard', component: SellerPageComponent},
   {path: 'user/cart', component: OrderDetailsComponent},
   {path: 'user/product-list', component: ProductListComponent},
-  {path: 'product/view', component: ProductViewComponent}
+  {path: 'user/product/view', component: ProductViewComponent},
+  {path: 'user/product/view:id', component: ProductViewComponent}
 
 ];
 

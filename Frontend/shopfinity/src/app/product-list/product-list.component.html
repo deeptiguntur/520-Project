@@ -1,17 +1,7 @@
 <div>
-    <app-navbar></app-navbar>
-    <div class="category-bar">
-        <button>Deals</button>
-        <button>Clothing</button>
-        <button>Electronics</button>
-        <button>Home</button>
-        <button>Grocery</button>
-        <button>Furniture</button>
-        <button>Books</button>
-        <button>Beauty</button>
-    </div>
+    <app-navbar [showCategoryBar]="true"></app-navbar>
     <div class="products-container">
-        <div class="product" *ngFor="let product of productData; index as i">
+        <div class="product" *ngFor="let product of productData; index as i" (click)="productClicked(product._id)">
             <div class="product-image">
                 <img class="image" [src]="product.imgData[0]">
             </div>
@@ -25,15 +15,15 @@
                     </div>
                 </div>
                 <div class="price">
-                    <span *ngIf="product.discount" class="discount-price"><span class="dollar">$</span>{{product.discount}}</span>
-                    <span class="original-price" [ngClass]="{'is-discount' : product.discount}"><span class="dollar">$</span>{{product.price}}</span>
+                    <span *ngIf="product.sale" class="discount-price"><span class="dollar">$</span>{{product.discount}}</span>
+                    <span class="original-price" [ngClass]="{'is-discount' : product.sale}"><span class="dollar">$</span>{{product.price}}</span>
                 </div>
                 <div class="cart-buttons">
-                    <button *ngIf="addToCartData[i].addToCart" class="add-to-cart-btn" (click)="updateQuantity(true, i)">Add to cart</button>
+                    <button *ngIf="addToCartData[i].addToCart" class="add-to-cart-btn" (click)="updateQuantity(true, i, $event)">Add to cart</button>
                     <div class="button-area" *ngIf="!addToCartData[i].addToCart">
-                        <button class="quantity-change-btn" (click)="updateQuantity(false, i)"><i class="fa-solid fa-minus"></i></button>
+                        <button class="quantity-change-btn" (click)="updateQuantity(false, i, $event)"><i class="fa-solid fa-minus"></i></button>
                         <div class="quantity">{{addToCartData[i].quantity}}</div>
-                        <button class="quantity-change-btn" (click)="updateQuantity(true, i)"><i class="fa-solid fa-plus"></i></button>
+                        <button class="quantity-change-btn" (click)="updateQuantity(true, i, $event)"><i class="fa-solid fa-plus"></i></button>
                     </div>
                 </div>
             </div>
