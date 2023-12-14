@@ -35,7 +35,7 @@
                         <div class="quantity">{{selectedQuantity}}</div>
                         <button class="quantity-change-btn" (click)="updateQuantity(true)"><i class="fa-solid fa-plus"></i></button> -->
                             <button class="increase-btn" (click)="updateQuantity(true,orderList[0]['quantity'])"><i class="fa-solid fa-plus"></i></button>
-                            {{updateQuantity(true,orderList[0]['quantity'])}}
+                            <!-- {{updateQuantity(true,orderList[0]['quantity'])}} -->
                             <span class="item-quantity"><span class="quantity">{{ orderList[0]['quantity'] }} </span></span>
                             <button class="decrease-btn" (click)="updateQuantity(false,orderList[0]['quantity'])"><i class="fa-solid fa-minus"></i></button>
                         </div>
