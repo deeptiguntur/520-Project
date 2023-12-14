@@ -8,56 +8,71 @@
         </div>
         <div class ="user-product">
             <div class="product-display">
+                
                 <!-- Product -->
-                <div class="cart-image">
-                    <img src="../assets/Images/Iphone_15_pro.jpeg">
-    
-                </div>
-                <div class="Product-Details">
-                    <div class="Item">
-                        Apple
-                    </div>
-                    <div class="Description">
-                        IPhone 15 Pro Max 256GB
-                    </div>
-                    <div class="cart-added">
+                    <div class="cart-image">
+                        <!-- <img src="../assets/Images/Iphone_15_pro.jpeg"> -->
+                        <!-- <img src="data:image/jpeg;base64,{{ orderList[0]['imgData']  }}| b64encode | decode('utf-8')"> -->
+                        <img src="data:image/jpeg;base64,{{ orderList[0]['imgData'] }}">
 
+                    </div>
+                    <div class="Product-Details">
+                        <div class="Item">
+                            {{ orderList[0]['brand'] }} 
+                        </div>
+                        <div class="Description">
+                            <!-- <div *ngFor="let order of orderList"> -->
+                                <!-- {% for order in orderList %} -->
+                                    {{ orderList[0]['productDesc'] }} 
+                                    <!-- {{orderList[i]}} -->
+                                <!-- {% endfor %} -->
+                            <!-- </div> -->
                         
-                        <button class="increase-btn">+</button>
-                        <span class="item-quantity"><span class="quantity">1</span></span>
-                        <button class="decrease-btn">-</button>
-                      </div>
-                </div>
+                        </div>
+                        <div class="cart-added">
+
+                            <!-- <button class="quantity-change-btn" (click)="updateQuantity(false)"><i class="fa-solid fa-minus"></i></button>
+                        <div class="quantity">{{selectedQuantity}}</div>
+                        <button class="quantity-change-btn" (click)="updateQuantity(true)"><i class="fa-solid fa-plus"></i></button> -->
+                            <button class="increase-btn" (click)="updateQuantity(true,orderList[0]['quantity'])"><i class="fa-solid fa-plus"></i></button>
+                            <!-- {{updateQuantity(true,orderList[0]['quantity'])}} -->
+                            <span class="item-quantity"><span class="quantity">{{ orderList[0]['quantity'] }} </span></span>
+                            <button class="decrease-btn" (click)="updateQuantity(false,orderList[0]['quantity'])"><i class="fa-solid fa-minus"></i></button>
+                        </div>
+                    </div>
             </div>
             <div class="order-summary">
                 Order Summary
                 <div class="subtotal">
                     <span  class="head-total"><span class="Total-sub"></span>Subtotal</span>
-                    <span class="Amount"><span class="dollar">$</span>2900.00</span>
+                    <span class="Amount"><span class="dollar">$</span>{{ orderList[0]['price'] }} </span>
                 </div>
                 <div class="savings">
                     <span  class="head-total"><span class="total-saving"></span>Total Savings</span>
-                    <span class="amount-saved"><span class="dollar">-$</span>420.00</span>
+                    <span class="amount-saved"><span class="dollar">-$</span>{{ orderList[0]['discount'] }} </span>
                 </div>
                 <div class="deducted">
                     <span  class="head-total"><span class="final">Discounted Price</span> </span>
                     <div class="discount-amount">
-                    <span class="amount-final"><span class="dollar">$</span>2480.00</span>
+                    <span class="amount-final"><span class="dollar">$</span>{{getDiscounted(orderList[0]['price'] ,orderList[0]['discount'] )}} </span>
                     </div>
 
                 </div>
-                <div class="payment-page">
+                <!-- <div class="payment-page">
+                    
                     <span class="Payment"><span class="payment_box">Continue to Payment</span></span>
                     <div class="arrow">
                     <i class="fa-solid fa-arrow-right"></i>
                     </div>
-                </div>
+                </div> -->
+                <button class="payment-button" onclick="continueToPayment()">
+                    <span class="payment_box">Continue to Payment</span>
+                    <div class="arrow">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </button>
                 
             </div>
         </div>
     </div>
 </div>
-
-
-
-

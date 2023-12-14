@@ -19,6 +19,9 @@ export class AppService {
   getProducts():Observable<Product[]> {
     return this.httpClient.get<Product[]>(this.DEV + '/product/all-products');
   }
+  getOrders(){
+    return this.httpClient.get(this.DEV + '/orders');
+  }
 
 }
 

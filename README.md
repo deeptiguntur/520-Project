@@ -19,3 +19,10 @@ Windows - <br />
 Mac - <br />
 2. source .venv/bin/activate
 3. python -m flask run
+
+### model view methos demonstartion ###
+
+1.export FLASK_APP=views.py
+2.export FLASK_ENV=development
+flask run 
+
