@@ -19,5 +19,19 @@ export class OrderDetailsComponent {
   getDiscounted(val1: number, val2: number): number {
     return val1 - val2;
   }
+  // selectedQuantity = 0;
+
+  updateQuantity(increase: boolean, selectedQuantity: number ) :number{
+    if (increase) {
+      selectedQuantity = selectedQuantity+1;
+    } else {
+      if (selectedQuantity-1 === 0) {
+        selectedQuantity = 0;
+      } else {
+        selectedQuantity = selectedQuantity-1;
+      }
+    }
+    return selectedQuantity
+  }
 
 }

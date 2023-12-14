@@ -117,8 +117,34 @@ def addProduct():
         }
     else:
         return {
-            'res': 'True',
+            'res': 'False',
             'msg': "Error occurred during adding product"
+        }
+# Added selected products to cart
+#API endpoint for signup 
+@app.route('/cart', methods=['POST'])
+@cross_origin(origin='*')
+def product_cart():
+    cart_data=request.get_json()
+   
+    product_id=cart_data['_id']
+    quantity = cart_data['quantity']
+    cart_insert = {
+        'product_id': product_id,
+        'quantity': quantity,
+    }
+    ##Insert the document into the MongoDB collection
+    cart_result = cart_collection.insert_one(cart_insert)
+
+    if cart_result.inserted_id:
+        return {
+            'res': 'True',
+            'msg': "Added Product in Cart: {}".format(cart_result.inserted_id)
+        }
+    else:
+        return {
+            'res': 'False',
+            'msg': "Error occurred while adding product in cart"
         }
 
 @app.route("/product/all-products", methods=['GET'])
@@ -131,6 +157,16 @@ def getAllProducts():
         product['_id'] = str(product.get('_id'))
         product_list.append(product)
     return product_list 
+# listing those which has products categories 
+@app.route("/category", methods=['GET'])
+@cross_origin(origin='*')
+def categorypage():
+    products = list(product_collection.find())
+    list_category = []
+    for product in products:
+        product['_id'] = str(product.get('_id'))
+        list_category.append(product)
+    return list_category 
 @app.route("/orders", methods=['GET'])
 @cross_origin(origin='*')
 def orderdetails():
@@ -143,6 +179,7 @@ def orderdetails():
     products = list(product_collection.find())  # Retrieve all products
 
     # Add image data to each order based on product_id
+    print(orders)
     for order in orders:
         for product in products:
             product['_id']=str(product.get('_id'))
@@ -150,6 +187,11 @@ def orderdetails():
                 print("Hi")
                 order['_id'] = str(order.get('_id'))
                 order['imgData'] = product.get('imgData')
+                order['brand'] = product.get('brand')
+                order['productDesc']=product.get('productDesc')
+                order['price']=product.get('price')
+                order['discount']=product.get('discount')
+
                
 
 
