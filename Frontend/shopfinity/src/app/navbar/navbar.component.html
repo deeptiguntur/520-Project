@@ -1,6 +1,6 @@
 <div class="navbar-container">
     <div class="logo-navbar">
-        <a routerLink="/">
+        <a routerLink="/user/product-list">
             <img src="../assets/Logo/Logo_white.png">
         </a>
     </div>
@@ -10,6 +10,16 @@
     <div class="icons-area">
         <a> <i class="fa-regular fa-heart"></i> </a>
         <a routerLink="/user/cart"> <i class="fa-solid fa-cart-shopping"></i> </a>
-        <a> <i class="fa-solid fa-circle-user"></i> </a>
+        <a routerLink="/"> <i class="fa-solid fa-circle-user"></i> </a>
     </div>
+</div>
+<div *ngIf="showCategoryBar" class="category-bar">
+    <button>Deals</button>
+    <button>Clothing</button>
+    <button>Electronics</button>
+    <button>Home</button>
+    <button>Grocery</button>
+    <button>Furniture</button>
+    <button>Books</button>
+    <button>Beauty</button>
 </div>

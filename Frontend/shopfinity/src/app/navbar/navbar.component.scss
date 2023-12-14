@@ -45,3 +45,22 @@
         }
     }
 }
+
+
+.category-bar {
+    box-shadow: 0px 2px 5px #0a164626;
+    height: 3rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: $font;
+    background-color: $color;
+    font-weight: 500;
+    button {
+        background: transparent;
+        border: none;
+        font-size: 1rem;
+        color: white;
+        cursor: pointer;
+    }
+}

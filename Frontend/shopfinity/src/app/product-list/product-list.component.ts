@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { AppService } from '../app.service';
+import { Product } from './product.model';
+import { range } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -7,22 +11,44 @@ import { Component } from '@angular/core';
 })
 export class ProductListComponent {
 
-  showDiscount = true;
   selectedQuantity = 0;
   showAddToCart = true;
 
-  updateQuantity(increase: boolean) {
+  productData: Product[] = [];
+  addToCartData:any = [];
+
+  constructor(private appService: AppService, private router: Router) {}
+
+  ngOnInit() {
+    this.appService.getProducts().subscribe((data: Product[]) => {
+      this.productData = data;
+      for (let i=0; i<data.length; i++) {
+        this.addToCartData[i] = {addToCart: true, quantity: 0};
+      }
+    });
+
+  }
+
+  updateQuantity(increase: boolean, index: number, event:any) {
+    event.stopPropagation();
     if (increase) {
-      this.selectedQuantity = this.selectedQuantity+1;
-      this.showAddToCart = false;
+      this.addToCartData[index].quantity = this.addToCartData[index].quantity+1;
+      this.addToCartData[index].addToCart = false;
     } else {
-      if (this.selectedQuantity-1 === 0) {
-        this.showAddToCart = true;
-        this.selectedQuantity = 0;
+      if (this.addToCartData[index].quantity-1 === 0) {
+        this.addToCartData[index].addToCart = true;
+        this.addToCartData[index].quantity = 0;
       } else {
-        this.selectedQuantity = this.selectedQuantity-1;
+        this.addToCartData[index].quantity = this.addToCartData[index].quantity-1;
       }
     }
+  }
+
+  productClicked(productId: string) {
+    this.appService.selectedProduct = this.productData.find(product => product._id === productId);
+    sessionStorage.setItem('selectedProduct', JSON.stringify(this.appService.selectedProduct));
+    console.log(this.appService.selectedProduct)
+    this.router.navigate(['user/product/view'], { queryParams: { id: productId }})
   }
  
 }

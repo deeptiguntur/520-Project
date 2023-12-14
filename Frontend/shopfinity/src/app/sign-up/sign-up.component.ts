@@ -20,17 +20,38 @@ export class SignUpComponent {
     phone: ["", Validators.required],
     confirmPassword: ["", Validators.required]
   });
+
+  showSuccess = true;
+  showError = false;
+  successMsg = '';
+  errorMsg = '';
+
   constructor(private formBuilder: FormBuilder, private router: Router, private loginService: LoginService) {}
+
   onSignUp() {
-    console.log(this.signupForm.value);
     const password = this.signupForm.get('password')?.value;
     const confirmPassword = this.signupForm.get('confirmPassword')?.value;
 
     if (this.signupForm.valid && password === confirmPassword) {
-      this.loginService.signup(this.signupForm.value).subscribe(data => {
-        this.router.navigate(['/login']);
+      this.loginService.signup(this.signupForm.value).subscribe((data: any) => {
+        if (data.res === 'True') {
+          this.successMsg = data.msg;
+          this.showSuccess = true;
+          this.errorMsg = '';
+          this.showError = false;
+        } else {
+          this.successMsg = '';
+          this.showSuccess = false;
+          this.errorMsg = data.msg;
+          this.showError = true;
+        }
       });
     }
+
+    
+    
+
+
 
   }
 

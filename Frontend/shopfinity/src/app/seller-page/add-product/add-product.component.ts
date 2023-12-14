@@ -11,6 +11,7 @@ export class AddProductComponent {
 
   addProductForm = this.formBuilder.group({
     productName: ["", Validators.required],
+    brand: ["", Validators.required],
     productDesc: ["", Validators.required],
     category: ["", Validators.required],
     price: ["", Validators.required],
@@ -33,6 +34,9 @@ export class AddProductComponent {
       'imgData': this.imgData
     };
     if (this.addProductForm.valid && this.imgData.length) {
+      productData.discount = parseFloat(productData.discount);
+      productData.price = parseFloat(productData.price);
+      productData.quantity = parseInt(productData.quantity);
       this.sellerService.addProduct(productData).subscribe((data: any) => {
         if (data.res === 'True') {
           this.showSuccess = true;

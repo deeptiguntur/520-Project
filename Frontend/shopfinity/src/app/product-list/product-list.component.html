@@ -1,66 +1,29 @@
 <div>
-    <app-navbar></app-navbar>
-    <div class="category-bar">
-        <button>Deals</button>
-        <button>Clothing</button>
-        <button>Electronics</button>
-        <button>Home</button>
-        <button>Grocery</button>
-        <button>Furniture</button>
-        <button>Books</button>
-        <button>Beauty</button>
-    </div>
+    <app-navbar [showCategoryBar]="true"></app-navbar>
     <div class="products-container">
-        <div class="product">
+        <div class="product" *ngFor="let product of productData; index as i" (click)="productClicked(product._id)">
             <div class="product-image">
-                <img class="image" src="../assets/Images/img3.jpeg">
+                <img class="image" [src]="product.imgData[0]">
             </div>
             <div class="product-desc">
                 <div class="product-detail">
                     <div class="product-name">
-                        iPhone 14 Pro Max 256GB
+                        {{product.productName}}
                     </div>
                     <div class="brand-name">
-                        Apple
+                        {{product.brand}}
                     </div>
                 </div>
                 <div class="price">
-                    <span *ngIf="showDiscount" class="discount-price"><span class="dollar">$</span>999.99</span>
-                    <span class="original-price" [ngClass]="{'is-discount' : showDiscount}"><span class="dollar">$</span>1099.99</span>
+                    <span *ngIf="product.sale" class="discount-price"><span class="dollar">$</span>{{product.discount}}</span>
+                    <span class="original-price" [ngClass]="{'is-discount' : product.sale}"><span class="dollar">$</span>{{product.price}}</span>
                 </div>
                 <div class="cart-buttons">
-                    <button *ngIf="showAddToCart" class="add-to-cart-btn" (click)="updateQuantity(true)">Add to cart</button>
-                    <div class="button-area" *ngIf="!showAddToCart">
-                        <button class="quantity-change-btn" (click)="updateQuantity(false)"><i class="fa-solid fa-minus"></i></button>
-                        <div class="quantity">{{selectedQuantity}}</div>
-                        <button class="quantity-change-btn" (click)="updateQuantity(true)"><i class="fa-solid fa-plus"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <div class="product-image">
-                <img class="image" src="../assets/Images/img5.jpg">
-            </div>
-            <div class="product-desc">
-                <div class="product-detail">
-                    <div class="product-name">
-                        AirPods Max
-                    </div>
-                    <div class="brand-name">
-                        Apple
-                    </div>
-                </div>
-                <div class="price">
-                    <span *ngIf="showDiscount" class="discount-price"><span class="dollar">$</span>250.00</span>
-                    <span class="original-price" [ngClass]="{'is-discount' : showDiscount}"><span class="dollar">$</span>500.00</span>
-                </div>
-                <div class="cart-buttons">
-                    <button *ngIf="showAddToCart" class="add-to-cart-btn" (click)="updateQuantity(true)">Add to cart</button>
-                    <div class="button-area" *ngIf="!showAddToCart">
-                        <button class="quantity-change-btn" (click)="updateQuantity(false)"><i class="fa-solid fa-minus"></i></button>
-                        <div class="quantity">{{selectedQuantity}}</div>
-                        <button class="quantity-change-btn" (click)="updateQuantity(true)"><i class="fa-solid fa-plus"></i></button>
+                    <button *ngIf="addToCartData[i].addToCart" class="add-to-cart-btn" (click)="updateQuantity(true, i, $event)">Add to cart</button>
+                    <div class="button-area" *ngIf="!addToCartData[i].addToCart">
+                        <button class="quantity-change-btn" (click)="updateQuantity(false, i, $event)"><i class="fa-solid fa-minus"></i></button>
+                        <div class="quantity">{{addToCartData[i].quantity}}</div>
+                        <button class="quantity-change-btn" (click)="updateQuantity(true, i, $event)"><i class="fa-solid fa-plus"></i></button>
                     </div>
                 </div>
             </div>
