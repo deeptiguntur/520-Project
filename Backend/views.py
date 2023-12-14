@@ -1,7 +1,7 @@
 # views.py
 from flask import Flask, render_template
 from flask_cors import CORS, cross_origin
-from controller import login, signup, addProduct, product_cart, getAllProducts, categorypage, orderdetails
+from controller import login, signup, addProduct, product_cart, getAllProducts, categorypage, orderdetails,editProduct,search_type
 
 app = Flask(__name__)
 CORS(app)
@@ -47,6 +47,16 @@ def categorypage_route():
 def orderdetails_route():
     orders = orderdetails()
     return orders
+@app.route("/editproduct", methods=['POST'])
+@cross_origin(origin='*')
+def editProduct_route():
+    return editProduct()
+@app.route("/search", methods=['GET'])
+@cross_origin(origin='*')
+def search_type_route():
+    products_search=search_type()
+    return products_search
+
 
 if __name__ == "__main__":
     app.run(debug=True)

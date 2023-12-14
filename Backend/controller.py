@@ -3,13 +3,21 @@ from flask import request, jsonify
 from cryptography.fernet import Fernet
 from Models import collection, product_collection, cart_collection
 
+# key = Fernet.generate_key()
+# cipher_suite = Fernet(key)
+
+# def encrypt(text):
+#     encrypted_text = cipher_suite.encrypt(text.encode())
+#     return encrypted_text
+
+# def decrypt(encrypted_text):
+#     decrypted_text = cipher_suite.decrypt(encrypted_text).decode()
+#     return decrypted_text
 key = Fernet.generate_key()
 cipher_suite = Fernet(key)
-
 def encrypt(text):
     encrypted_text = cipher_suite.encrypt(text.encode())
     return encrypted_text
-
 def decrypt(encrypted_text):
     decrypted_text = cipher_suite.decrypt(encrypted_text).decode()
     return decrypted_text
@@ -19,11 +27,26 @@ def login():
     user = loginData['username']
     passw = loginData['password']
 
-    user_entry = collection.find_one({'username': user, 'password': passw})
+    user_entry = collection.find_one({'username': user})
+    print(user_entry)
+
     if user_entry:
-        return {'res': 'True', 'user_type': user_entry['user_type'], 'user_id': str(user_entry.get('_id'))}
+        decrypted = decrypt(user_entry['password'])
+        print(decrypted)
+        
+        if decrypted == passw:
+            print("Login successful")
+            return {'res': 'True', 'user_type': user_entry['user_type'], 'user_id': str(user_entry.get('_id'))}
+            # Add code for successful login, e.g., return a response or set a session variable
+        else:
+            print("Incorrect password")
+            return {'res': 'False'}
+            # Add code for incorrect password, e.g., return an error response
     else:
+        print("User not found")
         return {'res': 'False'}
+        # Add code for user not found, e.g., return an error response
+    
 
 def signup():
     signupData = request.get_json()
@@ -35,7 +58,7 @@ def signup():
         'last_name': signupData['last_name'],
         'address': signupData['address'],
         'phone': signupData['phone'],
-        'password': signupData['password']
+        'password': encrypt(signupData['password'])
     }
 
     result = collection.insert_one(user_data)
@@ -126,3 +149,57 @@ def orderdetails():
 
                 order_list.append(order)
     return order_list 
+##editing products
+def editProduct():
+    productData = request.get_json()
+    product_id = productData.get('product_id')  # Assuming 'product_id' is in your JSON payload
+
+    if not product_id:
+        return {
+            'res': 'False',
+            'msg': 'Product ID is missing in the request'
+        }
+
+    # Convert product_id to ObjectId
+    product_id = ObjectId(product_id)
+
+    # Find the existing product with the given product_id
+    existing_product = product_collection.find_one({'_id': product_id})
+
+    if not existing_product:
+        return {
+            'res': 'False',
+            'msg': 'Product not found for the given product_id'
+        }
+
+    # Update the existing product with the new data
+    result = product_collection.update_one({'_id': product_id}, {'$set': productData})
+
+    if result.modified_count > 0:
+        return {
+            'res': 'True',
+            'msg': 'Product updated successfully'
+        }
+    else:
+        return {
+            'res': 'False',
+            'msg': 'Failed to update product'
+        }
+##search products
+def search_type():
+    products = list(product_collection.find())
+    keyword = request.args.get("keyword")
+    search_product=[]
+    if not keyword:
+        return jsonify({"error": "Keyword parameter is missing"}), 400
+
+    results = [product for product in products if keyword.lower() in product["name"].lower()]
+    for product in products:
+        check=product.get('brand')
+        if check.lower()==keyword.lower():
+            search_product.append(product)
+    #     product['_id'] = str(product.get('_id'))
+    #     list_category.append(product)
+
+    return search_product
+
