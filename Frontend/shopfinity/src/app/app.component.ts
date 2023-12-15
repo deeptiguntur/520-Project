@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AppService } from './app.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +9,36 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-  constructor(public router: Router) {}
-  
+  notificationArr: any;
+  showNotification = false;
+  styling: any = [];
+  constructor(public router: Router, private appService: AppService) { }
+
   ngOnInit() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if (event.urlAfterRedirects === '/login') {
+          this.showNotification = false;
+        } else if (event.urlAfterRedirects === '/user/product-list') {
+          if (sessionStorage.getItem('user') === 'customer') {
+            this.appService.saleNotification().subscribe((data: any) => {
+              if (data.res === 'True') {
+                this.notificationArr = data.product;
+                this.showNotification = true;
+                let n;
+                for (let i = 0; i < this.notificationArr.length; i++) {
+                  if (i === 0) {
+                    n = '2rem';
+                  } else {
+                    n = (9 * i) + 'rem';
+                  }
+                  this.styling.push(n);
+                }
+              }
+            });
+          }
+        }
+      }
+    });
   }
 }

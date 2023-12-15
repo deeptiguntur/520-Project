@@ -23,6 +23,7 @@ export class UploadImagesComponent {
 
   ngOnChanges() {
     if (this.files) {
+      console.log(this.files)
       this.selectFiles(this.files);
     }
   }

@@ -54,8 +54,14 @@
                 <div class="img-preview">
                     <app-upload-images [files]="filesEvent" (imgData)="setImages($event)"></app-upload-images>
                 </div>
-                <div class="show-success" *ngIf="showSuccess">
+                <div class="img-preview" *ngIf="showImg">
+                    <img *ngFor='let preview of editProduct.imgData' [src]="preview" class="preview">
+                </div>
+                <div class="show-success" *ngIf="showSuccess && !this.editProduct?._id">
                     Product added successfully!
+                </div>
+                <div class="show-success" *ngIf="showSuccess && this.editProduct?._id">
+                    Product edited successfully!
                 </div>
                 <div class="show-error" *ngIf="showError">
                     Error while adding product.

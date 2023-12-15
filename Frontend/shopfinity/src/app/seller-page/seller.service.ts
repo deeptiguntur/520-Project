@@ -13,5 +13,9 @@ export class SellerService {
   addProduct(productData: any) {
     return this.httpClient.post(this.appService.DEV + '/seller/add-product', productData);
   }
+
+  editProduct(productData: any) {
+    return this.httpClient.post(this.appService.DEV + '/editproduct', productData);
+  }
   
 }

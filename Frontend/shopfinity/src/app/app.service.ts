@@ -27,6 +27,18 @@ export class AppService {
     return this.httpClient.post(this.DEV + '/cart', cartData);
   }
 
+  getCategoryProducts(category: any){
+    return this.httpClient.post<Product[]>(this.DEV + '/category', category);
+  }
+
+  searchByKeyword(keyword: any){
+    return this.httpClient.post<Product[]>(this.DEV + '/search', keyword);
+  }
+
+  saleNotification(){
+    return this.httpClient.get(this.DEV + '/sale-notification');
+  }
+
 }
 
 

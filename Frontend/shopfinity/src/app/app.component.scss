@@ -1,0 +1,38 @@
+@import '../styles.scss';
+
+a {
+  text-decoration: none;
+}
+
+.notification {
+  width: 23rem;
+  background-color: #f8f4ff;
+  color: #000;
+  text-align: center;
+  border-radius: 0.5rem;
+  position: fixed;
+  z-index: 1;
+  right: 3%;
+  // bottom: 30px;
+  font-size: 17px;
+  border: 1px solid rgba(0,0,0,.1);
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
+  padding: 0.3rem;
+  font: $font;
+  cursor: pointer;
+  
+  .img-notif {
+    height: 5rem;
+    display: flex;
+    img {
+      border-radius: 0.5rem;
+    }
+  }
+  .details {
+    padding: 1.2rem 0.5rem 0.5rem 0.5rem;
+    text-decoration: none;
+    .name {
+      font-weight: bold;
+    }
+  }
+}

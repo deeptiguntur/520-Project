@@ -12,17 +12,16 @@ Database - MongoDB <br />
 2. npm start
 
 ### To run Backend - <br />
-1. cd Backend
-Windows - <br />
-2. .venv\Scripts\activate
-3. python -m flask run
-Mac - <br />
-2. source .venv/bin/activate
-3. python -m flask run
-
-### model view methos demonstartion ###
+### MVC demonstration  ###
+Mac-<br />
 
 1.export FLASK_APP=views.py
 2.export FLASK_ENV=development
 flask run 
+<br />
+Windows - <br />
 
+1. $env:FLASK_APP = "views.py"
+2. $env:FLASK_ENV = "development"
+3. python -m flask run
+<br />

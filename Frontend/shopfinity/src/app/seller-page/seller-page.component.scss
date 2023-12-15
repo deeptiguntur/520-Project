@@ -51,10 +51,11 @@
             display: flex;
             margin-right: 1rem;
 
-            .img {
+            .image {
                 border-radius: 1rem;
-                width: 8rem;
                 object-fit: cover;
+      
+                max-width: 9rem;
             }
         }
 

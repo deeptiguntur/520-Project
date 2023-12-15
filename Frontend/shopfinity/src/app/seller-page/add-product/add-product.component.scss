@@ -55,6 +55,11 @@
         .img-preview {
             max-width: 40rem;
             margin-bottom: 1.5rem;
+            .preview {
+                max-width: 200px;
+                max-height: 200px;
+                margin: 0.5rem;
+            }
         }
         .show-success {
             text-align: center;
