@@ -23,6 +23,10 @@ export class AppService {
     return this.httpClient.get(this.DEV + '/orders');
   }
 
+  addToCart(cartData: any){
+    return this.httpClient.post(this.DEV + '/cart', cartData);
+  }
+
 }
 
 

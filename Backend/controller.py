@@ -85,7 +85,7 @@ def addProduct():
 def product_cart():
     cart_data=request.get_json()
    
-    product_id=cart_data['_id']
+    product_id=cart_data['product_id']
     quantity = cart_data['quantity']
     cart_insert = {
         'product_id': product_id,
@@ -143,10 +143,8 @@ def orderdetails():
                 order['productDesc']=product.get('productDesc')
                 order['price']=product.get('price')
                 order['discount']=product.get('discount')
-
-               
-
-
+                order['productName']=product.get('productName')
+                order['sale']=product.get('sale')
                 order_list.append(order)
     return order_list 
 ##editing products

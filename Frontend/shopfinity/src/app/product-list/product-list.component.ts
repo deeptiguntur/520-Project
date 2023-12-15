@@ -42,7 +42,17 @@ export class ProductListComponent {
         this.addToCartData[index].quantity = this.addToCartData[index].quantity-1;
       }
     }
+    this.addToCart(index);
   }
+
+  addToCart(index: number) {
+    const productClicked = this.productData[index]._id;
+    const quantity = this.addToCartData[index].quantity;
+    const addToCartData = {product_id: productClicked, quantity: quantity};
+    this.appService.addToCart(addToCartData).subscribe();
+  }
+
+
 
   productClicked(productId: string) {
     this.appService.selectedProduct = this.productData.find(product => product._id === productId);

@@ -7,13 +7,21 @@ import { AppService } from '../app.service';
   styleUrls: ['./order-details.component.scss']
 })
 export class OrderDetailsComponent {
-  orderList=[]
+  orderList:any=[]
+  totalPrice = 0;
+  totalSavings = 0;
 
   constructor(private appService: AppService) {}
   ngOnInit(){
     this.appService.getOrders().subscribe((data:any) => {
       console.log("data:",data.length)
       this.orderList = data;
+      for (let i=0; i<data.length; i++) {
+        this.totalPrice = parseFloat((this.totalPrice + data[i].price*data[i].quantity).toFixed(2));
+        if (data[i].sale) {
+          this.totalSavings = parseFloat((this.totalSavings + data[i].discount*data[i].quantity).toFixed(2));
+        }
+      }
   });
   }
   getDiscounted(val1: number, val2: number): number {
