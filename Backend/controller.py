@@ -55,7 +55,7 @@ def signup():
 
     result = collection.insert_one(user_data)
     if result.inserted_id:
-        return {'res': 'True', 'msg': "Signup successful!"}
+        return {'res': 'True', 'msg': "Signup successfull!"}
     else:
         return {'res': 'False', 'msg': "Error occurred during signup"}
 

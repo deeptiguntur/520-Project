@@ -1,12 +1,22 @@
 import unittest
 import json
-from app import app
+from views import app
+
+def suite():
+    suite = unittest.TestSuite()
+    suite.addTest(TestApp('test_signup'))
+    suite.addTest(TestApp('test_login'))
+    suite.addTest(TestApp('test_add_product'))
+    suite.addTest(TestApp('test_get_all_products'))
+    return suite
 
 class TestApp(unittest.TestCase):
 
     def setUp(self):
         self.app = app.test_client()
         self.app.testing = True
+        self.user_credentials = None
+
 
     def test_signup(self):
         # Test signup endpoint
@@ -23,11 +33,11 @@ class TestApp(unittest.TestCase):
 
         response = self.app.post('/signup', json=data)
         result = json.loads(response.data.decode('utf-8'))
-        print("Response:", result)
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(result['res'], 'True')
         self.assertEqual(result['msg'], 'Signup successfull!')
+
 
     def test_login(self):
         # Test login endpoint
@@ -67,4 +77,6 @@ class TestApp(unittest.TestCase):
         self.assertIsInstance(products, list)
 
 if __name__ == '__main__':
-    unittest.main()
+    # unittest.main()
+    runner = unittest.TextTestRunner()
+    runner.run(suite())
