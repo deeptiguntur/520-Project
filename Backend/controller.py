@@ -226,24 +226,13 @@ def search_type():
     search_product=[]
     if not keyword:
         return jsonify({"error": "Keyword parameter is missing"}), 400
-
-    # results = [product for product in products if keyword.lower() in product["name"].lower()]
-    for product in products:
-        check=product.get('brand')
-        if check.lower()==keyword.lower():
-            for product in products:
-                product['_id'] = str(product.get('_id'))
-                search_product.append(product)
     else:
-        # results = [product for product in products if keyword.lower() in product["name"].lower()]
         for product in products:
             check=product.get('brand')
             checkName=product.get('productName')
             if check.lower()==keyword.lower() or keyword.lower() in checkName.lower():
                 product['_id'] = str(product.get('_id'))
                 search_product.append(product)
-        #     product['_id'] = str(product.get('_id'))
-        #     list_category.append(product)
 
     return search_product
 
