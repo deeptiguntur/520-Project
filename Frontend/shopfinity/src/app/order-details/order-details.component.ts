@@ -6,14 +6,16 @@ import { AppService } from '../app.service';
   templateUrl: './order-details.component.html',
   styleUrls: ['./order-details.component.scss']
 })
+// initialising the variables to be used in functionalities 
 export class OrderDetailsComponent {
   orderList:any=[]
   totalPrice = 0;
   totalSavings = 0;
-
+//calculating the total price and total discount so that it will be dynamically viewed in frontend 
   constructor(private appService: AppService) {}
   ngOnInit(){
     this.appService.getOrders().subscribe((data:any) => {
+      c
       console.log("data:",data.length)
       this.orderList = data;
       for (let i=0; i<data.length; i++) {
@@ -24,6 +26,7 @@ export class OrderDetailsComponent {
       }
   });
   }
+  //alfter applying discounted value what is the actual amount to be paid 
   getDiscounted(val1: number, val2: number): number {
     return val1 - val2;
   }
