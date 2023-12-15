@@ -84,15 +84,28 @@ def addProduct():
         }
 def product_cart():
     cart_data=request.get_json()
-   
     product_id=cart_data['_id']
-    quantity = cart_data['quantity']
-    cart_insert = {
-        'product_id': product_id,
-        'quantity': quantity,
-    }
-    ##Insert the document into the MongoDB collection
-    cart_result = cart_collection.insert_one(cart_insert)
+    cart_quantity = cart_data['quantity']
+    orders = list(cart_collection.find())
+    for order in orders:
+        
+        check_order = str(order.get('product_id'))
+        if check_order == product_id:
+            condition = {'product_id': check_order}
+
+            # Specify the update operation
+            update_operation = {'$set': {'quantity': order.get('quantity')+cart_quantity}}
+
+            # Update the document in the collection
+            cart_result = cart_collection.update_one(condition, update_operation)
+
+        else:
+            cart_insert = {
+                'product_id': product_id,
+                'quantity': cart_quantity,
+            }
+            ##Insert the document into the MongoDB collection
+            cart_result = cart_collection.insert_one(cart_insert)
 
     if cart_result.inserted_id:
         return {
