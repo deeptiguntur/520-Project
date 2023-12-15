@@ -1,5 +1,5 @@
 <div>
-    <app-navbar [showCategoryBar]="true"></app-navbar>
+    <app-navbar [showCategoryBar]="true" (category)="categoryFilter($event)" (searchKeyword)="search($event)"></app-navbar>
     <div class="products-container">
         <div class="product" *ngFor="let product of productData; index as i" (click)="productClicked(product._id)">
             <div class="product-image">

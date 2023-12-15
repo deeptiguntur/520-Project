@@ -1,7 +1,7 @@
 # views.py
 from flask import Flask, render_template
 from flask_cors import CORS, cross_origin
-from controller import login, signup, addProduct, product_cart, getAllProducts, categorypage, orderdetails,editProduct,search_type
+from controller import login, signup, addProduct, product_cart, getAllProducts, categorypage, orderdetails,editProduct,search_type, notifySale
 
 app = Flask(__name__)
 CORS(app)
@@ -35,8 +35,8 @@ def product_cart_route():
 def getAllProducts_route():
     products = getAllProducts()
     return products
-#based on category it will display a different page 
-@app.route("/category", methods=['GET'])
+
+@app.route("/category", methods=['POST'])
 @cross_origin(origin='*')
 def categorypage_route():
     categories = categorypage()
@@ -52,13 +52,16 @@ def orderdetails_route():
 @cross_origin(origin='*')
 def editProduct_route():
     return editProduct()
-#based on keywords it will search for the letters
-@app.route("/search", methods=['GET'])
+@app.route("/search", methods=['POST'])
 @cross_origin(origin='*')
 def search_type_route():
     products_search=search_type()
     return products_search
-
+@app.route("/sale-notification", methods=['GET'])
+@cross_origin(origin='*')
+def sale_notification_route():
+    sale_product=notifySale()
+    return sale_product
 
 if __name__ == "__main__":
     app.run(debug=True)

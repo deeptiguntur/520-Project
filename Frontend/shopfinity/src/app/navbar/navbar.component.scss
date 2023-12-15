@@ -5,6 +5,9 @@
     justify-content: space-between;
     .logo-navbar {
         display: flex;
+        a {
+            cursor: pointer;
+        }
         img {
             height: 4.5rem;
         }

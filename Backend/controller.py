@@ -2,11 +2,11 @@
 from flask import request, jsonify
 from cryptography.fernet import Fernet
 from Models import collection, product_collection, cart_collection
+from bson import ObjectId
 
 
 #encrypted the password
 def encrypt(text):
-    # print(key)
     key = Fernet.generate_key()
     cipher_suite = Fernet(key)
     encrypted_text = cipher_suite.encrypt(text.encode())
@@ -23,11 +23,9 @@ def login():
     passw = loginData['password']
 
     user_entry = collection.find_one({'username': user})
-    print(user_entry)
 
     if user_entry:
         decrypted = decrypt(user_entry['password'],user_entry['key'])
-        print(decrypted)
         
         if decrypted == passw:
             print("Login successful")
@@ -129,28 +127,25 @@ def getAllProducts():
 #Based on Categories displayed in Navigation bar, displaying all the products
 def categorypage():
     products = list(product_collection.find())
+    productData = request.get_json()
+    category_type = productData.get('category')  # Assuming 'product_id' is in your JSON payload
     list_category = []
     for product in products:
-        product['_id'] = str(product.get('_id'))
-        list_category.append(product)
+        if product.get('category')==category_type:
+            product['_id'] = str(product.get('_id'))
+            list_category.append(product)
     return list_category 
 #displaying the orders of the customer in cart page
 def orderdetails():
     orders = list(cart_collection.find())
     order_list = []
-    # for order in orders:
-    #     order['_id'] = str(order.get('_id'))
-    #     order_list.append(order)
-    # return order_list 
     products = list(product_collection.find())  # Retrieve all products
 
     # Add image data to each order based on product_id
-    print(orders)
     for order in orders:
         for product in products:
             product['_id']=str(product.get('_id'))
             if product['_id'] == order['product_id']:
-                print("Hi")
                 order['_id'] = str(order.get('_id'))
                 order['imgData'] = product.get('imgData')
                 order['brand'] = product.get('brand')
@@ -183,6 +178,9 @@ def editProduct():
             'res': 'False',
             'msg': 'Product not found for the given product_id'
         }
+    
+    if productData['sale']:
+        productData['saleNotification'] = True
 
     # Update the existing product with the new data
     result = product_collection.update_one({'_id': product_id}, {'$set': productData})
@@ -197,10 +195,34 @@ def editProduct():
             'res': 'False',
             'msg': 'Failed to update product'
         }
+
+## Show notification to user when a product goes on sale
+def notifySale():
+    cart_data = cart_collection.find()
+    notif_data = []
+    for product in cart_data:
+        product_data = product_collection.find_one(ObjectId(product['product_id']))
+        if 'saleNotification' in product_data:
+            result = product_collection.update_one({'_id': ObjectId(product['product_id'])}, {'$unset' : { 'saleNotification' : True}})
+            product_data['_id'] = str(product_data.get('_id'))
+            notif_data.append(product_data)
+    if len(notif_data):
+        return {
+            'res': 'True',
+            'product': notif_data
+        }
+
+    return {
+        'res': 'False'
+    }
+
+
+
 ##serching the name of the products baed on the keywords
 def search_type():
     products = list(product_collection.find())
-    keyword = request.args.get("keyword")
+    Data_key = request.get_json()
+    keyword=Data_key.get('keyword')
     search_product=[]
     if not keyword:
         return jsonify({"error": "Keyword parameter is missing"}), 400
@@ -209,9 +231,19 @@ def search_type():
     for product in products:
         check=product.get('brand')
         if check.lower()==keyword.lower():
-            search_product.append(product)
-    #     product['_id'] = str(product.get('_id'))
-    #     list_category.append(product)
+            for product in products:
+                product['_id'] = str(product.get('_id'))
+                search_product.append(product)
+    else:
+        # results = [product for product in products if keyword.lower() in product["name"].lower()]
+        for product in products:
+            check=product.get('brand')
+            checkName=product.get('productName')
+            if check.lower()==keyword.lower() or keyword.lower() in checkName.lower():
+                product['_id'] = str(product.get('_id'))
+                search_product.append(product)
+        #     product['_id'] = str(product.get('_id'))
+        #     list_category.append(product)
 
     return search_product
 

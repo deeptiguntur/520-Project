@@ -1,11 +1,11 @@
 <div class="navbar-container">
     <div class="logo-navbar">
-        <a routerLink="/user/product-list">
+        <a (click)="homePage()">
             <img src="../assets/Logo/Logo_white.png">
         </a>
     </div>
     <div class="search-bar">
-        <input type="text" class="input-field" name="search" placeholder="Search">
+        <input type="text" class="input-field" name="search" placeholder="Search" (keyup.enter)="search($event)">
     </div>
     <div class="icons-area">
         <a> <i class="fa-regular fa-heart"></i> </a>
@@ -14,12 +14,12 @@
     </div>
 </div>
 <div *ngIf="showCategoryBar" class="category-bar">
-    <button>Deals</button>
-    <button>Clothing</button>
-    <button>Electronics</button>
-    <button>Home</button>
-    <button>Grocery</button>
-    <button>Furniture</button>
-    <button>Books</button>
-    <button>Beauty</button>
+    <button (click)="selectCategory('deals')">Deals</button>
+    <button (click)="selectCategory('clothing')">Clothing</button>
+    <button (click)="selectCategory('electronics')">Electronics</button>
+    <button (click)="selectCategory('home')">Home</button>
+    <button (click)="selectCategory('grocery')">Grocery</button>
+    <button (click)="selectCategory('furniture')">Furniture</button>
+    <button (click)="selectCategory('books')">Books</button>
+    <button (click)="selectCategory('beauty')">Beauty</button>
 </div>

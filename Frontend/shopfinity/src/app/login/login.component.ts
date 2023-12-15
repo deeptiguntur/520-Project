@@ -33,8 +33,10 @@ export class LoginComponent {
         this.showError = false;
         if (data.user_type === 'customer') {
           this.router.navigate(['/user/product-list']);
+          sessionStorage.setItem('user', 'customer');
         } else {
           this.router.navigate(['/seller/dashboard']);
+          sessionStorage.setItem('user', 'seller');
         }
       } else {
         this.showError = true;

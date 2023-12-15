@@ -34,8 +34,22 @@ export class ProductListComponent {
         }
       });
     });
+  }
 
+  categoryFilter(category: string) {
+    const categoryData = {category: category};
+    this.appService.getCategoryProducts(categoryData).subscribe((data: Product[]) => {
+      this.productData = data;
+    });
+  }
 
+  search(keyword: any) {
+    const keywordData = {
+      keyword: keyword
+    }
+    this.appService.searchByKeyword(keywordData).subscribe((data: Product[]) => {
+      this.productData = data;
+    });
   }
 
   updateQuantity(increase: boolean, index: number, event:any) {
