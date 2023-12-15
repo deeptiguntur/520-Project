@@ -13,12 +13,16 @@ from Models import collection, product_collection, cart_collection
 # def decrypt(encrypted_text):
 #     decrypted_text = cipher_suite.decrypt(encrypted_text).decode()
 #     return decrypted_text
-key = Fernet.generate_key()
-cipher_suite = Fernet(key)
+# key = Fernet.generate_key()
+# cipher_suite = Fernet(key)
 def encrypt(text):
+    # print(key)
+    key = Fernet.generate_key()
+    cipher_suite = Fernet(key)
     encrypted_text = cipher_suite.encrypt(text.encode())
-    return encrypted_text
-def decrypt(encrypted_text):
+    return encrypted_text,key
+def decrypt(encrypted_text,key):
+    cipher_suite = Fernet(key)
     decrypted_text = cipher_suite.decrypt(encrypted_text).decode()
     return decrypted_text
 
@@ -31,7 +35,7 @@ def login():
     print(user_entry)
 
     if user_entry:
-        decrypted = decrypt(user_entry['password'])
+        decrypted = decrypt(user_entry['password'],user_entry['key'])
         print(decrypted)
         
         if decrypted == passw:
@@ -50,6 +54,7 @@ def login():
 
 def signup():
     signupData = request.get_json()
+    password_encrypted,key=encrypt(signupData['password'])
     user_data = {
         'user_type': signupData['user_type'],
         'email': signupData['email'],
@@ -58,7 +63,8 @@ def signup():
         'last_name': signupData['last_name'],
         'address': signupData['address'],
         'phone': signupData['phone'],
-        'password': encrypt(signupData['password'])
+        'password': password_encrypted,
+        'key':key
     }
 
     result = collection.insert_one(user_data)
@@ -84,9 +90,10 @@ def addProduct():
         }
 def product_cart():
     cart_data=request.get_json()
-    product_id=cart_data['_id']
+    product_id=cart_data['product_id']
     cart_quantity = cart_data['quantity']
     orders = list(cart_collection.find())
+    flag=0
     for order in orders:
         
         check_order = str(order.get('product_id'))
@@ -94,23 +101,24 @@ def product_cart():
             condition = {'product_id': check_order}
 
             # Specify the update operation
-            update_operation = {'$set': {'quantity': order.get('quantity')+cart_quantity}}
+            update_operation = {'$set': {'quantity': cart_quantity}}
 
             # Update the document in the collection
-            cart_result = cart_collection.update_one(condition, update_operation)
+            cart_update = cart_collection.update_one(condition, update_operation)
+            flag=1
 
-        else:
-            cart_insert = {
-                'product_id': product_id,
-                'quantity': cart_quantity,
-            }
-            ##Insert the document into the MongoDB collection
-            cart_result = cart_collection.insert_one(cart_insert)
+    if flag==0:
+        cart_insert = {
+            'product_id': product_id,
+            'quantity': cart_quantity,
+        }
+        ##Insert the document into the MongoDB collection
+        cart_result = cart_collection.insert_one(cart_insert)
 
-    if cart_result.inserted_id:
+    if flag==1 or cart_result.inserted_id:
         return {
             'res': 'True',
-            'msg': "Added Product in Cart: {}".format(cart_result.inserted_id)
+            'msg': "Added Product in Cart"
         }
     else:
         return {
@@ -156,10 +164,8 @@ def orderdetails():
                 order['productDesc']=product.get('productDesc')
                 order['price']=product.get('price')
                 order['discount']=product.get('discount')
-
-               
-
-
+                order['productName']=product.get('productName')
+                order['sale']=product.get('sale')
                 order_list.append(order)
     return order_list 
 ##editing products
