@@ -3,29 +3,20 @@ from flask import request, jsonify
 from cryptography.fernet import Fernet
 from Models import collection, product_collection, cart_collection
 
-# key = Fernet.generate_key()
-# cipher_suite = Fernet(key)
 
-# def encrypt(text):
-#     encrypted_text = cipher_suite.encrypt(text.encode())
-#     return encrypted_text
-
-# def decrypt(encrypted_text):
-#     decrypted_text = cipher_suite.decrypt(encrypted_text).decode()
-#     return decrypted_text
-# key = Fernet.generate_key()
-# cipher_suite = Fernet(key)
+#encrypted the password
 def encrypt(text):
     # print(key)
     key = Fernet.generate_key()
     cipher_suite = Fernet(key)
     encrypted_text = cipher_suite.encrypt(text.encode())
     return encrypted_text,key
+#decrypted the password
 def decrypt(encrypted_text,key):
     cipher_suite = Fernet(key)
     decrypted_text = cipher_suite.decrypt(encrypted_text).decode()
     return decrypted_text
-
+#login function for the customer and sellers
 def login():
     loginData = request.get_json()
     user = loginData['username']
@@ -51,7 +42,7 @@ def login():
         return {'res': 'False'}
         # Add code for user not found, e.g., return an error response
     
-
+#sign up page for customer and seller
 def signup():
     signupData = request.get_json()
     password_encrypted,key=encrypt(signupData['password'])
@@ -74,7 +65,7 @@ def signup():
         return {'res': 'False', 'msg': "Error occurred during signup"}
 
 # Define other controller functions here for product addition, cart, etc.
-
+#Seller page for adding the product
 def addProduct():
     productData = request.get_json()
     result = product_collection.insert_one(productData)
@@ -88,6 +79,7 @@ def addProduct():
             'res': 'False',
             'msg': "Error occurred during adding product"
         }
+#Adding the products into the cart page
 def product_cart():
     cart_data=request.get_json()
     product_id=cart_data['product_id']
@@ -125,6 +117,7 @@ def product_cart():
             'res': 'False',
             'msg': "Error occurred while adding product in cart"
         }
+#getting products in the Home Page 
 def getAllProducts():
     # products = product_collection.find().toArray()
     products = list(product_collection.find())
@@ -133,7 +126,7 @@ def getAllProducts():
         product['_id'] = str(product.get('_id'))
         product_list.append(product)
     return product_list 
-
+#Based on Categories displayed in Navigation bar, displaying all the products
 def categorypage():
     products = list(product_collection.find())
     list_category = []
@@ -141,7 +134,7 @@ def categorypage():
         product['_id'] = str(product.get('_id'))
         list_category.append(product)
     return list_category 
-
+#displaying the orders of the customer in cart page
 def orderdetails():
     orders = list(cart_collection.find())
     order_list = []
@@ -168,7 +161,7 @@ def orderdetails():
                 order['sale']=product.get('sale')
                 order_list.append(order)
     return order_list 
-##editing products
+##editing the products details added by the seller
 def editProduct():
     productData = request.get_json()
     product_id = productData.get('product_id')  # Assuming 'product_id' is in your JSON payload
@@ -204,7 +197,7 @@ def editProduct():
             'res': 'False',
             'msg': 'Failed to update product'
         }
-##search products
+##serching the name of the products baed on the keywords
 def search_type():
     products = list(product_collection.find())
     keyword = request.args.get("keyword")
@@ -212,7 +205,7 @@ def search_type():
     if not keyword:
         return jsonify({"error": "Keyword parameter is missing"}), 400
 
-    results = [product for product in products if keyword.lower() in product["name"].lower()]
+    # results = [product for product in products if keyword.lower() in product["name"].lower()]
     for product in products:
         check=product.get('brand')
         if check.lower()==keyword.lower():
