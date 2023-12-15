@@ -19,7 +19,7 @@ export class LoginComponent {
   showError = false;
 
   constructor(private loginService: LoginService, private appService: AppService, private formBuilder: FormBuilder, private router: Router) {}
-
+// checking if the username nad password does have some value in the form 
   onSignIn() {
     console.log(this.loginForm.get('username')?.value);
     console.log(this.loginForm.get('password')?.value);
@@ -27,6 +27,7 @@ export class LoginComponent {
       username: this.loginForm.get('username')?.value,
       password: this.loginForm.get('password')?.value
     }
+    //based on the profile login it will be routed to that particular page
     this.loginService.login(loginData).subscribe((data:any) => {
       if (data.res === "True") {
         this.showError = false;
