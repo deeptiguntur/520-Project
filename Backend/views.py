@@ -52,6 +52,7 @@ def orderdetails_route():
 @cross_origin(origin='*')
 def editProduct_route():
     return editProduct()
+#editing the products details only allowed for sellers
 @app.route("/search", methods=['POST'])
 @cross_origin(origin='*')
 def search_type_route():

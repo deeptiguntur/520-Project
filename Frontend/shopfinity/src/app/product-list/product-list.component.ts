@@ -28,7 +28,7 @@ export class ProductListComponent {
       this.appService.getOrders().subscribe((cartData:any) => {
         let index = 0;
         for (let j=0; j<data.length; j++) {
-          index = this.productData.findIndex(p => p._id === cartData[j].product_id)
+          index = this.productData.findIndex(p => p._id === cartData[j]?.product_id)
           this.addToCartData[index].quantity = cartData[j].quantity;
           this.addToCartData[index].addToCart = false;
         }

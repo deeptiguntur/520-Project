@@ -27,6 +27,7 @@ export class SellerPageComponent {
   }
 
   goToAddProduct() {
+    sessionStorage.removeItem('editProduct');
     this.router.navigate(['/add-product']);
   }
 }

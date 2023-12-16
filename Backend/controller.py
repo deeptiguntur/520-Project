@@ -88,14 +88,19 @@ def product_cart():
         
         check_order = str(order.get('product_id'))
         if check_order == product_id:
-            condition = {'product_id': check_order}
+            print(cart_quantity)
+            if cart_quantity == 0:
+                cart_collection.delete_one({'_id': order.get('_id')})
+                flag=1
+            else:
+                condition = {'product_id': check_order}
 
-            # Specify the update operation
-            update_operation = {'$set': {'quantity': cart_quantity}}
+                # Specify the update operation
+                update_operation = {'$set': {'quantity': cart_quantity}}
 
-            # Update the document in the collection
-            cart_update = cart_collection.update_one(condition, update_operation)
-            flag=1
+                # Update the document in the collection
+                cart_update = cart_collection.update_one(condition, update_operation)
+                flag=1
 
     if flag==0:
         cart_insert = {
@@ -225,7 +230,9 @@ def search_type():
     keyword=Data_key.get('keyword')
     search_product=[]
     if not keyword:
-        return jsonify({"error": "Keyword parameter is missing"}), 400
+        for product in products:
+            product['_id'] = str(product.get('_id'))
+            search_product.append(product)
     else:
         for product in products:
             check=product.get('brand')
