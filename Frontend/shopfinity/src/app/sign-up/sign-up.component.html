@@ -60,10 +60,12 @@
                 <!-- Sign Up Button -->
                 <button type="submit" class="signup-button" (click)="onSignUp()">Sign Up</button>
 
+                <!-- Success message -->
                 <div class="success-msg" *ngIf="showSuccess">
                     {{successMsg}}
                 </div>
 
+                <!-- Error message -->
                 <div class="error-msg" *ngIf="showError">
                     {{errorMsg}}
                 </div>

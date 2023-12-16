@@ -10,7 +10,7 @@ db = client['Shopfinity']
 collection = db['Login_Details']
 #product table
 product_collection = db['Product_Details']
-#cart tabe
+#cart table
 cart_collection = db['Cart_Details']
 #checking if it is working or not correctly
 try:

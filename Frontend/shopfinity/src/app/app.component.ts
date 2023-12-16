@@ -15,11 +15,13 @@ export class AppComponent {
   constructor(public router: Router, private appService: AppService) { }
 
   ngOnInit() {
+    // To check current page url
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (event.urlAfterRedirects === '/login') {
           this.showNotification = false;
         } else if (event.urlAfterRedirects === '/user/product-list') {
+          // Check if user is a customer then see if any products went on sale recently. If yes show notification in the UI.
           if (sessionStorage.getItem('user') === 'customer') {
             this.appService.saleNotification().subscribe((data: any) => {
               if (data.res === 'True') {

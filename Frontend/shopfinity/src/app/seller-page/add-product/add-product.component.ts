@@ -10,6 +10,7 @@ import { Product } from 'src/app/product-list/product.model';
 })
 export class AddProductComponent {
 
+  // Form group for the Add Product form with various form controls and validators
   addProductForm = this.formBuilder.group({
     productName: ["", Validators.required],
     brand: ["", Validators.required],
@@ -31,6 +32,7 @@ export class AddProductComponent {
   constructor(private formBuilder: FormBuilder, private sellerService: SellerService) {}
 
   ngOnInit() {
+    // Check if user edited a product then populate the form fields based on product data
     this.editProduct = JSON.parse(String(sessionStorage.getItem('editProduct')));
     if (this.editProduct?._id) {
       this.showImg = true;
@@ -43,10 +45,10 @@ export class AddProductComponent {
       this.addProductForm.get('price')?.setValue(this.editProduct.price);
       this.addProductForm.get('sale')?.setValue(this.editProduct.sale);
       this.addProductForm.get('discount')?.setValue(this.editProduct.discount);
-      // sessionStorage.removeItem('editProduct');
     }
   }
 
+  // Method to handle the addition or editing of a product
   addProduct() {
     if (this.editProduct?._id) {
       let productData: any = this.addProductForm.value;
@@ -83,10 +85,12 @@ export class AddProductComponent {
     }
   }
 
+  // Method to handle the selection of images
   selectFiles(event: any) {
     this.filesEvent = event;
   }
   
+  // Set image data for form
   setImages(event: any) {
     this.showImg = false;
     this.imgData = Array.from(event);

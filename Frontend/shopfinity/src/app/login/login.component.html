@@ -1,8 +1,10 @@
 <form [formGroup]="loginForm">
+    <!-- Logo -->
     <div class="logo">
         <img src="../assets/Logo/Logo_white.png">
     </div>
     <div class="login-container">
+        <!-- Banner img -->
         <div class="carousel-div">
             <img src="../assets/Images/Banner_img_1.jpg">
         </div>
@@ -11,6 +13,7 @@
                 <div class="sign-in">
                     Sign In
                 </div>
+                <!-- Sign in fields -->
                 <input type="text" class="input-field" name="username" placeholder="Username"
                     formControlName="username">
                 <input class="input-field" name="username" type="password" placeholder="Password"
@@ -19,7 +22,9 @@
                     Invalid username or password.
                 </div>
                 <button type="submit" class="login-button" (click)="onSignIn()">Sign In</button>
+                <!-- Forgot password -->
                 <a class="forgot-pwd" routerLink="/">Forgot password ?</a>
+                <!-- Signup link -->
                 <div class="sign-up">
                     Don't already have an account? <a class="sign-up-link" routerLink="/signup">Sign Up</a>
                 </div>

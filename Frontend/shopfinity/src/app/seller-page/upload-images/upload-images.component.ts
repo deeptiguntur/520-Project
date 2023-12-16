@@ -14,7 +14,10 @@ export class UploadImagesComponent {
   previews: string[] = [];
   imageInfos?: Observable<any>;
 
+  // Input property to receive files from the parent component
   @Input() files: any;
+
+  // Output property to emit image data back to the parent component
   @Output() imgData: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private sellerService: SellerService) { }
@@ -28,6 +31,7 @@ export class UploadImagesComponent {
     }
   }
 
+  // Method to show selected files as image preview in UI
   selectFiles(event: any): void {
     this.selectedFiles = event.target.files;
     this.previews = [];

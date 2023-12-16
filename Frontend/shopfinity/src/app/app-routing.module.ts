@@ -8,6 +8,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductViewComponent } from './product-view/product-view.component';
 
+// All the routes in the application
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full' },
   {path: 'login', component: LoginComponent},

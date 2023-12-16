@@ -20,11 +20,14 @@ export class ProductListComponent {
   constructor(private appService: AppService, private router: Router) {}
 
   ngOnInit() {
+    // API call to backend retrieve the list of products
     this.appService.getProducts().subscribe((data: Product[]) => {
       this.productData = data;
       for (let i=0; i<data.length; i++) {
         this.addToCartData[i] = {addToCart: true, quantity: 0};
       }
+
+      // Get cart data and update the quantity of the product added to cart
       this.appService.getOrders().subscribe((cartData:any) => {
         let index = 0;
         for (let j=0; j<data.length; j++) {
@@ -36,6 +39,7 @@ export class ProductListComponent {
     });
   }
 
+  // Method to filter products by category
   categoryFilter(category: string) {
     const categoryData = {category: category};
     this.appService.getCategoryProducts(categoryData).subscribe((data: Product[]) => {
@@ -43,6 +47,7 @@ export class ProductListComponent {
     });
   }
 
+  // Method to search products by keyword
   search(keyword: any) {
     const keywordData = {
       keyword: keyword
@@ -52,6 +57,7 @@ export class ProductListComponent {
     });
   }
 
+  // Method to update quantity when adding or removing items from the cart
   updateQuantity(increase: boolean, index: number, event:any) {
     event.stopPropagation();
     if (increase) {
@@ -71,6 +77,7 @@ export class ProductListComponent {
     this.addToCart(index);
   }
 
+  // Method to add items to the cart
   addToCart(index: number) {
     const productClicked = this.productData[index]._id;
     const quantity = this.addToCartData[index].quantity;
@@ -78,8 +85,7 @@ export class ProductListComponent {
     this.appService.addToCart(addToCartData).subscribe();
   }
 
-
-
+  // Method to handle the click event when a product is selected and open product view page
   productClicked(productId: string) {
     this.appService.selectedProduct = this.productData.find(product => product._id === productId);
     sessionStorage.setItem('selectedProduct', JSON.stringify(this.appService.selectedProduct));

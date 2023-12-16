@@ -15,13 +15,17 @@ export class NavbarComponent {
 
   constructor(private router: Router){}
 
+  // Handle category filter if user click on a category
   selectCategory(category: string) {
     this.category.emit(category);
   }
 
+  // Handle search if user enter on search bar
   search(event: any) {
     this.searchKeyword.emit(event.target.value);
   }
+
+  // Navigate to home page when user clicks on logo
   homePage() {
     if(sessionStorage.getItem('user') === 'customer') {
       this.router.navigate(['/user/product-list']);

@@ -21,10 +21,12 @@ export class ProductViewComponent {
     this.selectedImg = this.product.imgData[0];
   }
 
+  // Method to handle the click event when an image is selected to change the larger image
   imgClicked(img: any) {
     this.selectedImg = img;
   }
 
+  // Method to update the cart quantity based on whether to increase or decrease
   updateQuantity(increase: boolean) {
     if (increase) {
       this.cartQuantity = this.cartQuantity+1;

@@ -1,18 +1,22 @@
 <div class="navbar-container">
+    <!-- Logo -->
     <div class="logo-navbar">
         <a (click)="homePage()">
             <img src="../assets/Logo/Logo_white.png">
         </a>
     </div>
+    <!-- Search bar -->
     <div class="search-bar">
         <input type="text" class="input-field" name="search" placeholder="Search" (keyup.enter)="search($event)">
     </div>
+    <!-- Add to cart and other icons -->
     <div class="icons-area">
         <a> <i class="fa-regular fa-heart"></i> </a>
         <a routerLink="/user/cart"> <i class="fa-solid fa-cart-shopping"></i> </a>
         <a routerLink="/"> <i class="fa-solid fa-circle-user"></i> </a>
     </div>
 </div>
+<!-- Category bar -->
 <div *ngIf="showCategoryBar" class="category-bar">
     <button (click)="selectCategory('deals')">Deals</button>
     <button (click)="selectCategory('clothing')">Clothing</button>

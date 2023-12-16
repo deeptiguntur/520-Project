@@ -11,11 +11,13 @@ def encrypt(text):
     cipher_suite = Fernet(key)
     encrypted_text = cipher_suite.encrypt(text.encode())
     return encrypted_text,key
+
 #decrypted the password
 def decrypt(encrypted_text,key):
     cipher_suite = Fernet(key)
     decrypted_text = cipher_suite.decrypt(encrypted_text).decode()
     return decrypted_text
+
 #login function for the customer and sellers
 def login():
     loginData = request.get_json()
@@ -77,6 +79,7 @@ def addProduct():
             'res': 'False',
             'msg': "Error occurred during adding product"
         }
+
 #Adding the products into the cart page
 def product_cart():
     cart_data=request.get_json()
@@ -120,7 +123,8 @@ def product_cart():
             'res': 'False',
             'msg': "Error occurred while adding product in cart"
         }
-#getting products in the Home Page 
+
+# Getting all products for home page
 def getAllProducts():
     # products = product_collection.find().toArray()
     products = list(product_collection.find())
@@ -129,22 +133,24 @@ def getAllProducts():
         product['_id'] = str(product.get('_id'))
         product_list.append(product)
     return product_list 
-#Based on Categories displayed in Navigation bar, displaying all the products
+
+# Based on Categories displayed in Navigation bar, displaying filtered products
 def categorypage():
     products = list(product_collection.find())
     productData = request.get_json()
-    category_type = productData.get('category')  # Assuming 'product_id' is in your JSON payload
+    category_type = productData.get('category')
     list_category = []
     for product in products:
         if product.get('category')==category_type:
             product['_id'] = str(product.get('_id'))
             list_category.append(product)
     return list_category 
-#displaying the orders of the customer in cart page
+
+# Displaying the orders of the customer in cart page
 def orderdetails():
     orders = list(cart_collection.find())
     order_list = []
-    products = list(product_collection.find())  # Retrieve all products
+    products = list(product_collection.find())
 
     # Add image data to each order based on product_id
     for order in orders:
@@ -161,7 +167,8 @@ def orderdetails():
                 order['sale']=product.get('sale')
                 order_list.append(order)
     return order_list 
-##editing the products details added by the seller
+
+# Editing the products details added by the seller
 def editProduct():
     productData = request.get_json()
     product_id = productData.get('product_id')  # Assuming 'product_id' is in your JSON payload
@@ -222,8 +229,7 @@ def notifySale():
     }
 
 
-
-##serching the name of the products baed on the keywords
+##searching the name of the products based on the keywords
 def search_type():
     products = list(product_collection.find())
     Data_key = request.get_json()

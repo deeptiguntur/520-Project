@@ -9,6 +9,8 @@ import { LoginService } from '../login/login.service';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
+
+  // Signup form
   signupForm = this.formBuilder.group({
     user_type: ["customer", Validators.required],
     username: ["", Validators.required],
@@ -21,6 +23,7 @@ export class SignUpComponent {
     confirmPassword: ["", Validators.required]
   });
 
+  // Flags and messages for displaying success and error messages to the user
   showSuccess = true;
   showError = false;
   successMsg = '';
@@ -28,6 +31,7 @@ export class SignUpComponent {
 
   constructor(private formBuilder: FormBuilder, private router: Router, private loginService: LoginService) {}
 
+  // Signup method to call API when user submits signup form
   onSignUp() {
     const password = this.signupForm.get('password')?.value;
     const confirmPassword = this.signupForm.get('confirmPassword')?.value;
@@ -48,13 +52,6 @@ export class SignUpComponent {
       });
     }
 
-    
-    
-
-
-
   }
-
-
   
 }

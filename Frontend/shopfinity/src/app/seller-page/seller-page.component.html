@@ -6,10 +6,13 @@
             <button class="add-product-btn" (click)="goToAddProduct()">Add Product</button>
         </div>
         <div class="product-list">
+            <!-- Product list section with ngFor loop to iterate over each product -->
             <div class="product" *ngFor="let product of productData; index as i">
+                <!-- Product image section -->
                 <div class="product-image">
                     <img class="image" [src]="product.imgData[0]">
                 </div>
+                <!-- Product details section -->
                 <div class="product-details">
                     <div class="product-desc">
                         <div class="product-name"> {{product.productName}} </div>
@@ -17,6 +20,7 @@
                         <div class="category"><span class="">Category: </span> {{product.category}}</div>
                         <div class="price"><span class="dollar">$</span>{{product.price}}</div>
                     </div>
+                    <!-- Buttons section for edit and delete actions -->
                     <div class="buttons">
                         <a class="edit-btn" (click)="editProduct(product)"><i class="fa-solid fa-pencil"></i> Edit</a>
                         <button class="delete-btn"><i class="fa-solid fa-trash"></i></button>

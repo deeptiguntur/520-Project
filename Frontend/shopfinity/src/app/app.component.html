@@ -1,6 +1,7 @@
 <div>
   <div class="container">
     <router-outlet></router-outlet>
+    <!-- Show notification -->
     <div *ngIf="showNotification && notificationArr.length">
       <a routerLink="/user/cart" class="notification" *ngFor="let product of notificationArr; index as i" [style.bottom]="styling[i]">
         <div class="img-notif">

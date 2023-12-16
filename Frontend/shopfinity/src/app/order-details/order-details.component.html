@@ -6,13 +6,13 @@
             Cart
     
         </div>
+        <!-- Section to display cart products -->
         <div class ="user-product">
             <div>
+                <!-- Iterate over all the cart products -->
                 <div class="product-display" *ngFor="let product of orderList">
                     <!-- Product -->
                     <div class="cart-image">
-                        <!-- <img src="../assets/Images/Iphone_15_pro.jpeg"> -->
-                        <!-- <img src="data:image/jpeg;base64,{{ orderList[0]['imgData']  }}| b64encode | decode('utf-8')"> -->
                         <img [src]="product.imgData[0]">
 
                     </div>
@@ -36,6 +36,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Order summary section to display total and discounted price -->
             <div class="order-summary">
                 Order Summary
                 <div class="subtotal">
@@ -53,13 +54,7 @@
                     </div>
 
                 </div>
-                <!-- <div class="payment-page">
-                    
-                    <span class="Payment"><span class="payment_box">Continue to Payment</span></span>
-                    <div class="arrow">
-                    <i class="fa-solid fa-arrow-right"></i>
-                    </div>
-                </div> -->
+                
                 <button class="payment-button" onclick="continueToPayment()">
                     <span class="payment_box">Continue to Payment</span>
                     <div class="arrow">

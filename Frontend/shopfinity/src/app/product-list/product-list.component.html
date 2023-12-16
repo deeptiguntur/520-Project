@@ -1,24 +1,37 @@
 <div>
+    <!-- Include the app-navbar component with options for showing the category bar, and handling category and search events -->
     <app-navbar [showCategoryBar]="true" (category)="categoryFilter($event)" (searchKeyword)="search($event)"></app-navbar>
+
+    <!-- Container for displaying the products -->
     <div class="products-container">
+        <!-- Iterate over each product in productData using ngFor -->
         <div class="product" *ngFor="let product of productData; index as i" (click)="productClicked(product._id)">
+            <!-- Product image section -->
             <div class="product-image">
                 <img class="image" [src]="product.imgData[0]">
             </div>
+
+            <!-- Product description section -->
             <div class="product-desc">
+                <!-- Product details including name and brand -->
                 <div class="product-detail">
                     <div class="product-name">
-                        {{product.productName}}
+                        {{ product.productName }}
                     </div>
                     <div class="brand-name">
-                        {{product.brand}}
+                        {{ product.brand }}
                     </div>
                 </div>
+
+                <!-- Product price section with sale and discount information -->
                 <div class="price">
                     <span *ngIf="product.sale" class="discount-price"><span class="dollar">$</span>{{product.discount}}</span>
                     <span class="original-price" [ngClass]="{'is-discount' : product.sale}"><span class="dollar">$</span>{{product.price}}</span>
                 </div>
+
+                <!-- Cart buttons section -->
                 <div class="cart-buttons">
+                    <!-- "Add to cart" button or quantity change buttons based on addToCartData -->
                     <button *ngIf="addToCartData[i].addToCart" class="add-to-cart-btn" (click)="updateQuantity(true, i, $event)">Add to cart</button>
                     <div class="button-area" *ngIf="!addToCartData[i].addToCart">
                         <button class="quantity-change-btn" (click)="updateQuantity(false, i, $event)"><i class="fa-solid fa-minus"></i></button>
