@@ -55,7 +55,7 @@ Notes -
 •	In case of an error, an appropriate error message is returned.<br />
 •	Optionally, the encrypt function can be used to encrypt sensitive information like usernames and passwords before storage.<br />
 •	The document is inserted into the MongoDB collection named collection.<br />
-•	Ensure to handle errors gracefully in the application based on the received response.<br />
+•	Ensure to handle errors in the application based on the received response.<br />
 
 
 #### Add-Product Endpoint
@@ -71,7 +71,7 @@ Notes
 •	The API response includes a success message along with the product ID if the product addition is successful.<br />
 •	In case of an error, an appropriate error message is returned.<br />
 •	The document is inserted into the MongoDB collection named product_collection.<br />
-•	Ensure to handle errors gracefully in the application based on the received response.<br />
+•	Ensure to handle errors in the application based on the received response.<br />
 
 
 #### Get All-Products Endpoint
@@ -88,7 +88,7 @@ Notes
 •	In case of an error, an appropriate error message is returned.<br />
 •	The document IDs are converted to strings for better compatibility with JSON serialization.<br />
 •	The products are fetched from the MongoDB collection named product_collection.<br />
-•	Ensure to handle errors gracefully in the application based on the received response.<br />
+•	Ensure to handle errors in the application based on the received response.<br />
 
 
 #### Cart Endpoint
@@ -104,7 +104,7 @@ Notes
 •	The API response includes a success message along with the cart item ID if the product addition to the cart is successful.<br />
 •	In case of an error, an appropriate error message is returned.<br />
 •	The document is inserted into the MongoDB collection named cart_collection.<br />
-•	Ensure to handle errors gracefully in the application based on the received response.<br />
+•	Ensure to handle errors in the application based on the received response.<br />
 
 
 #### Category Endpoint
@@ -114,14 +114,30 @@ The Get All Products by Category API endpoint retrieves information about all pr
 
 Endpoint - /category
 
-Method - GET
+Method - POST
 
 Notes
 •	The API response includes a list of product objects with details such as product ID, name, description, price, quantity, seller, and category.<br />
 •	In case of an error, an appropriate error message is returned.<br />
 •	The document IDs are converted to strings for better compatibility with JSON serialization.<br />
 •	The products are fetched from the MongoDB collection named product_collection.<br />
-•	Ensure to handle errors gracefully in the application based on the received response.<br />
+•	Ensure to handle errors in the application based on the received response.<br />
+
+#### Search Endpoint
+
+Description
+This will return all the products from the Database based on the keyword provided by the user.
+
+Endpoint - /search
+
+Method - POST
+
+Notes
+•	The API response includes a list of product objects with details such as product ID, name, description, price, quantity, seller, and category.<br />
+•	In case of an error, an appropriate error message is returned.<br />
+•	The document IDs are converted to strings for better compatibility with JSON serialization.<br />
+•	The products are fetched from the MongoDB collection named product_collection.<br />
+•	Ensure to handle errors in the application based on the received response.<br />
 
 
 #### Orders Endpoint
@@ -137,7 +153,22 @@ Notes -
 •	The API response includes a list of order objects with details such as order ID, product ID, quantity, product image data, brand, product description, price, and discount.<br />
 •	In case of an error, an appropriate error message is returned.<br />
 •	The documents are retrieved from the MongoDB collections named cart_collection and product_collection.<br />
-•	Ensure to handle errors gracefully in the application based on the received response.<br />
+•	Ensure to handle errors in the application based on the received response.<br />
+
+#### Show notification Endpoint
+
+Description
+This endpoint will alert the user if there are product in cart which went on sale.
+
+Endpoint - /sale-notification
+
+Method - GET
+
+Notes - 
+•	The API response includes a list of order objects with details such as order ID, product ID, quantity, product image data, brand, product description, price, and discount of the product which went on sale.<br />
+•	In case of an error, an appropriate error message is returned.<br />
+•	The documents are retrieved from the MongoDB collections named cart_collection and product_collection.<br />
+•	Ensure to handle errors in the application based on the received response.<br />
 
 
 
