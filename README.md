@@ -26,6 +26,44 @@ Windows - <br />
 3. python -m flask run
 <br />
 
+## Application functionality - 
+
+### User - 
+
+1. Sign up from the login screen as Customer, enter personal details, username and password.
+2. Go to login page, use the same username and password to login
+3. Product List page - All the products available will be shown.
+4. Click on Add to cart button - Product will be added to cart.
+5. User can click on a product, this will go to product view page.
+Product view page - <br />
+•	User can click all the images shown to see a larger image.
+•	Click add to cart button - Product will be added to cart.
+6. Click on cart icon from the navigation bar.
+Cart page - <br/>
+•	Products added to cart will be shown
+•	Product quantity can be increased or remove from cart
+Product List Page - <br/>
+6. Type keyword in search bar and enter.
+7. Only products containing the keyword will be returned.
+8. Click on any of the Product category in the navigation bar.
+9. Products related to the particular category will be shown.
+10. If seller puts the cart products on sale - Notification will be shown that product went on sale.
+
+### Seller - 
+
+1. Sign up from the login screen as Customer, enter personal details, username and password.
+2. Go to login page, use the same username and password to login.
+3. Seller dashboard page will open which lists all the products created by seller.
+4. Click on Add to product button.
+Add product page - <br/>
+•	Fill all the form fields, select images and click "Add product" button to add product.
+5. In dashboard page, product can be edited or deleted.
+6. Click edit product - Edit product page will open - 
+7. Here the seller can change images, put the product on sale or remove sale from product.
+8. Click "Edit product button" the product will be edited and changes will be reflected in both seller and user pages.
+
+
+
 ## API documentation - 
 
 #### Login Endpoint<br />
